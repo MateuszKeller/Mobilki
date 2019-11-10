@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/linearLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainScreenLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/basicRed"
@@ -19,5 +20,90 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+    <ImageButton
+        android:id="@+id/visibilityButton"
+        android:layout_width="42dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="16dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:padding="0dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/menu" />
+
+    <EditText
+        android:id="@+id/searchBox"
+        android:layout_width="328dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/input"
+        android:fontFamily="sans-serif"
+        android:hint="Wyszukaj"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:textColor="@color/darkRed"
+        android:textColorHint="@color/darkGrey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <Button
+        android:id="@+id/testProf"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="328dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/input"
+        android:radius="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBox" />
+
+    <TextView
+        android:id="@+id/testProfName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="mgr Marian Kowalski"
+        android:textColor="#000"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/testProf"
+        app:layout_constraintTop_toTopOf="@+id/testProf" />
+
+    <TextView
+        android:id="@+id/testProfDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Wydział: FTIMS"
+        android:textColor="@color/darkGrey"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/testProf"
+        app:layout_constraintTop_toBottomOf="@+id/testProfName" />
+
+    <TextView
+        android:id="@+id/testProfGrades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="212 oceny"
+        android:textColor="@color/darkGrey"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/testProf"
+        app:layout_constraintEnd_toEndOf="@+id/testProf" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

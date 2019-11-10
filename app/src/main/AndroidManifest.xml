@@ -20,6 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainScreen" />
+        <activity android:name=".Profile" />
+        <activity android:name=".GradeForm" />
+        <activity android:name=".UserName" />
     </application>
 
 </manifest>
