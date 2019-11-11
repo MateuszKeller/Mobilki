@@ -4,7 +4,6 @@
     android:id="@+id/gradeFromLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/basicRed">
 
     <ImageButton
@@ -27,7 +26,7 @@
         android:layout_width="328dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button"
         android:fontFamily="sans-serif-medium"
@@ -38,5 +37,217 @@
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/closeButton" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acceptButton"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/circularRevealRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/bgZ"
+                android:layout_width="328dp"
+                android:layout_height="201dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/input"
+                android:radius="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Z"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Zdawalność"
+                    android:textColor="@color/darkRed"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="26sp"
+                    app:layout_constraintStart_toStartOf="@+id/bgZ"
+                    app:layout_constraintTop_toTopOf="@+id/bgZ" />
+
+                <ImageView
+                    android:id="@+id/bookZ"
+                    android:layout_width="35dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="45dp"
+                    app:layout_constraintStart_toStartOf="@+id/bgZ"
+                    app:layout_constraintTop_toBottomOf="@+id/Z"
+                    app:srcCompat="@drawable/book" />
+
+                <TextView
+                    android:id="@+id/textZ"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="52dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start|top"
+                    android:text="@string/zdawalnosc"
+                    android:textColor="@color/darkRed"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/bgZ"
+                    app:layout_constraintTop_toBottomOf="@+id/Z" />
+
+            <View
+                android:id="@+id/bgD"
+                android:layout_width="328dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input"
+                android:radius="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bgZ" />
+
+                <TextView
+                    android:id="@+id/D"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dostępność"
+                    android:textColor="@color/darkRed"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="26sp"
+                    app:layout_constraintStart_toStartOf="@+id/bgD"
+                    app:layout_constraintTop_toTopOf="@+id/bgD" />
+
+                <ImageView
+                    android:id="@+id/bookD"
+                    android:layout_width="35dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="45dp"
+                    app:layout_constraintStart_toStartOf="@+id/bgD"
+                    app:layout_constraintTop_toBottomOf="@+id/D"
+                    app:srcCompat="@drawable/book" />
+
+                <TextView
+                    android:id="@+id/textD"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="52dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start|top"
+                    android:textSize="16sp"
+                    android:text="@string/dostepnosc"
+                    android:textColor="@color/darkRed"
+                    app:layout_constraintStart_toStartOf="@+id/bgD"
+                    app:layout_constraintTop_toBottomOf="@+id/D" />
+
+            <View
+                android:id="@+id/bgM"
+                android:layout_width="328dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input"
+                android:radius="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bgD" />
+
+                <TextView
+                    android:id="@+id/M"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Metodyka"
+                    android:textColor="@color/darkRed"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="26sp"
+                    app:layout_constraintStart_toStartOf="@+id/bgM"
+                    app:layout_constraintTop_toTopOf="@+id/bgM" />
+
+                <ImageView
+                    android:id="@+id/bookM"
+                    android:layout_width="35dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="45dp"
+                    app:layout_constraintStart_toStartOf="@+id/bgM"
+                    app:layout_constraintTop_toBottomOf="@+id/M"
+                    app:srcCompat="@drawable/book" />
+
+                <TextView
+                    android:id="@+id/textM"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="52dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start|top"
+                    android:textSize="16sp"
+                    android:text="@string/merytoryka"
+                    android:textColor="@color/darkRed"
+                    app:layout_constraintStart_toStartOf="@+id/bgM"
+                    app:layout_constraintTop_toBottomOf="@+id/M"/>
+
+            <View
+                android:id="@+id/opinionButton"
+                android:layout_width="328dp"
+                android:layout_height="217dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bgM" />
+
+                <TextView
+                    android:id="@+id/opinion"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Opinia:"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="26sp"
+                    app:layout_constraintEnd_toEndOf="@+id/opinionButton"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/opinionButton"
+                    app:layout_constraintTop_toTopOf="@+id/opinionButton" />
+
+                <EditText
+                    android:id="@+id/opinionText"
+                    android:layout_width="328dp"
+                    android:layout_height="158dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/input"
+                    android:fontFamily="sans-serif"
+                    android:textSize="16sp"
+                    android:padding="4dp"
+                    android:textColor="@color/greyishRed"
+                    android:hint="Napisz opinię.."
+                    android:textColorHint="@color/greyishRed"
+                    android:gravity="top"
+                    app:layout_constraintEnd_toEndOf="@+id/opinionButton"
+                    app:layout_constraintStart_toStartOf="@+id/opinionButton"
+                    app:layout_constraintTop_toBottomOf="@+id/opinion" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

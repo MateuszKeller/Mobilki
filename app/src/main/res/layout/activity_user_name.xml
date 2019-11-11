@@ -52,7 +52,7 @@
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
         android:textColor="@color/darkRed"
-        android:textColorHint="@color/darkRed"
+        android:textColorHint="@color/greyishRed"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/acceptButton"
         app:layout_constraintEnd_toEndOf="parent"

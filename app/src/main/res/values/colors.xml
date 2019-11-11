@@ -8,7 +8,8 @@
     <color name="darkRed">#620905</color>
     <color name="lightRed">#C59C9A</color>
     <color name="buttonRed">#B54944</color>
-
+    <color name="checkBox">#E3D5D5</color>
+    <color name="greyishRed">#826666</color>
 
     <color name="basicGrey">#B2B3B3</color>
     <color name="darkGrey">#707070</color>

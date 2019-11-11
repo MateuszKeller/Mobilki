@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">GradeProf</string>
     <string name="action_settings">Settings</string>
+
+    <string name="zdawalnosc">Jak bardzo trzeba się napocić, aby zaliczyć przedmiot. Wystarczy chodzić na zajęcia i promiennie się uśmiechnąć (5 pkt.) czy trzeba sprzedać duszę diabłu a obie nerki ukraińskiej mafii medycznej (0 pkt.)?</string>
+    <string name="dostepnosc">Prowadzący praktycznie nocuje na uczelni, gotowy przyjąć głodnych konsultacji studentów o każdej porze dnia i nocy (5pkt.), czy może raczej przypomina kometę Halleya i na uczelni pojawia się na krótką chwilę co 75 lat (0 pkt.)?</string>
+    <string name="merytoryka">Czas na zajęciach mija Ci błyskawicznie a po powrocie z uczelni rzucasz się do książek, żeby jeszcze trochę poczytać w temacie (5 pkt.) czy mozolnie odliczasz kolejne nanosekundy dzielące Cię od upragnionego końca (0 pkt.)?</string>
+
+
 </resources>
