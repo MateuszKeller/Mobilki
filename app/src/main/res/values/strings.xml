@@ -8,9 +8,11 @@
 
     <string name="testProfName">mgr Marian Kowalski</string>
     <string name="testProfInfo">LUBIE PLACKI !!!</string>
+    <string name="testProfDate">24.10.2019</string>
     <string name="testProfZ">4.7</string>
     <string name="testProfD">3.395</string>
     <string name="testProfM">2.1</string>
 
 
 </resources>
+

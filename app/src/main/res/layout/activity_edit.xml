@@ -18,11 +18,11 @@
         android:text="@string/testProfName"
         android:textColor="@color/basicGrey"
         android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/photo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/closeButton2"
+        android:id="@+id/closeButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
@@ -32,12 +32,11 @@
         android:padding="0dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profName2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/close" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/photo"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
@@ -45,6 +44,181 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+
+    <Button
+        android:id="@+id/editButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:fontFamily="sans-serif-medium"
+        android:text="Edytuj"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/basicGrey"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:fontFamily="sans-serif-medium"
+        android:text="Usuń"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/basicGrey"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editButton" />
+
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:text="Ocena dodana: 24.10.2019 r."
+        android:textColor="@color/basicGrey"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+
+    <ImageView
+        android:id="@+id/infoZ"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/information"
+        app:srcCompat="@drawable/i" />
+
+    <TextView
+        android:id="@+id/textZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:text="Zdawalność"
+        android:textColor="@color/basicGrey"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/infoZ"
+        app:layout_constraintTop_toBottomOf="@+id/information" />
+
+    <example.gradeprof.RatingBarSvg
+        android:id="@+id/ratingZ"
+        android:layout_width="wrap_content"
+        android:layout_height="26sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressDrawable="@drawable/book_ratingbar"
+        android:rating="@string/testProfZ"
+        android:stepSize="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textZ"
+        app:layout_constraintTop_toBottomOf="@+id/information" />
+
+    <ImageView
+        android:id="@+id/infoD"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoZ"
+        app:srcCompat="@drawable/i" />
+
+    <TextView
+        android:id="@+id/textD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:text="Dostępność"
+        android:textColor="@color/basicGrey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/infoZ"
+        app:layout_constraintTop_toBottomOf="@+id/textZ" />
+
+    <example.gradeprof.RatingBarSvg
+        android:id="@+id/ratingD"
+        android:layout_width="wrap_content"
+        android:layout_height="26sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:numStars="5"
+        android:progressDrawable="@drawable/book_ratingbar"
+        app:layout_constraintStart_toEndOf="@+id/textD"
+        app:layout_constraintTop_toBottomOf="@+id/ratingZ"
+        android:rating="@string/testProfD"
+        android:isIndicator="true" />
+
+    <ImageView
+        android:id="@+id/infoM"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoD"
+        app:srcCompat="@drawable/i" />
+
+    <TextView
+        android:id="@+id/textM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:text="Merytoryka"
+        android:textColor="@color/basicGrey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/infoZ"
+        app:layout_constraintTop_toBottomOf="@+id/textD" />
+
+    <example.gradeprof.RatingBarSvg
+        android:id="@+id/ratingM"
+        android:layout_width="wrap_content"
+        android:layout_height="26sp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="12dp"
+        android:numStars="5"
+        android:progressDrawable="@drawable/book_ratingbar"
+        app:layout_constraintStart_toEndOf="@+id/textM"
+        app:layout_constraintTop_toBottomOf="@+id/ratingD"
+        android:rating="@string/testProfM"
+        android:isIndicator="true"/>
+
+    <TextView
+        android:id="@+id/opinions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:text="Opinia"
+        android:textColor="@color/basicGrey"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textM" />
+
 
     <!--TODO przyciski -->
     <!--TODO rozpiska -->

@@ -167,9 +167,9 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/informationText"
+        app:layout_constraintTop_toBottomOf="@+id/infoD"
         app:srcCompat="@drawable/i" />
 
     <TextView
@@ -215,23 +215,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textM" />
 
-
-
-
-
-
-    <!--
-        <RatingBar
-            style="@style/CustomRatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="112dp"
-            android:layout_marginBottom="328dp"
-            android:numStars="5"
-            android:rating=""
-            android:stepSize="0.5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    -->
     <!--TODO opinie -->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,9 @@ class MainScreen : AppCompatActivity() {
         testProf.setOnClickListener{
         startActivity(Intent( this, Profile::class.java))}
 
+        menuButton.setOnClickListener{
+        startActivity(Intent( this, Opinions::class.java))}
+
     }
 
 }
