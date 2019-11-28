@@ -23,6 +23,8 @@
         <activity android:name=".Profile" />
         <activity android:name=".GradeForm" />
         <activity android:name=".UserName" />
+        <activity android:name=".Edit" />
+        <activity android:name=".Opinions" />
     </application>
 
 </manifest>

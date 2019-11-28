@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/gradeFromLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -78,17 +79,19 @@
                     app:layout_constraintStart_toStartOf="@+id/bgZ"
                     app:layout_constraintTop_toTopOf="@+id/bgZ" />
 
-                <ImageView
-                    android:id="@+id/bookZ"
-                    android:layout_width="35dp"
-                    android:layout_height="28dp"
+                <example.gradeprof.RatingBarSvg
+                    android:id="@+id/ratingZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26sp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginStart="45dp"
+                    android:numStars="5"
+                    android:progressDrawable="@drawable/book_ratingbar"
+                    android:stepSize="0.5"
+                    app:layout_constraintEnd_toEndOf="@+id/bgZ"
                     app:layout_constraintStart_toStartOf="@+id/bgZ"
-                    app:layout_constraintTop_toBottomOf="@+id/Z"
-                    app:srcCompat="@drawable/book" />
+                    app:layout_constraintTop_toBottomOf="@+id/Z" />
 
-                <TextView
+            <TextView
                     android:id="@+id/textZ"
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
@@ -127,15 +130,17 @@
                     app:layout_constraintStart_toStartOf="@+id/bgD"
                     app:layout_constraintTop_toTopOf="@+id/bgD" />
 
-                <ImageView
-                    android:id="@+id/bookD"
-                    android:layout_width="35dp"
-                    android:layout_height="28dp"
+                <example.gradeprof.RatingBarSvg
+                    android:id="@+id/ratingD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26sp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginStart="45dp"
+                    android:numStars="5"
+                    android:progressDrawable="@drawable/book_ratingbar"
+                    android:stepSize="0.5"
+                    app:layout_constraintEnd_toEndOf="@+id/bgD"
                     app:layout_constraintStart_toStartOf="@+id/bgD"
-                    app:layout_constraintTop_toBottomOf="@+id/D"
-                    app:srcCompat="@drawable/book" />
+                    app:layout_constraintTop_toBottomOf="@+id/D" />
 
                 <TextView
                     android:id="@+id/textD"
@@ -176,15 +181,17 @@
                     app:layout_constraintStart_toStartOf="@+id/bgM"
                     app:layout_constraintTop_toTopOf="@+id/bgM" />
 
-                <ImageView
-                    android:id="@+id/bookM"
-                    android:layout_width="35dp"
-                    android:layout_height="28dp"
+                <example.gradeprof.RatingBarSvg
+                    android:id="@+id/ratingM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26sp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginStart="45dp"
+                    android:numStars="5"
+                    android:progressDrawable="@drawable/book_ratingbar"
+                    android:stepSize="0.5"
+                    app:layout_constraintEnd_toEndOf="@+id/bgM"
                     app:layout_constraintStart_toStartOf="@+id/bgM"
-                    app:layout_constraintTop_toBottomOf="@+id/M"
-                    app:srcCompat="@drawable/book" />
+                    app:layout_constraintTop_toBottomOf="@+id/M" />
 
                 <TextView
                     android:id="@+id/textM"
@@ -205,7 +212,7 @@
                 android:layout_width="328dp"
                 android:layout_height="217dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="200dp"
                 android:background="@drawable/button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -249,5 +256,6 @@
 
 
 
-
+    <!--TODO sensowna odleglość dolnego marginesu -->
+    <!--TODO custom checkobx -->
 </androidx.constraintlayout.widget.ConstraintLayout>

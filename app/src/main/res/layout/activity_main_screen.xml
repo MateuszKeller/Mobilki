@@ -106,4 +106,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/testProf"
         app:layout_constraintEnd_toEndOf="@+id/testProf" />
 
+    <!--TODO wyszukiwanie -->
+    <!--TODO wypisywanie prowadzących z listy-->
+    <!--TODO menu -->
 </androidx.constraintlayout.widget.ConstraintLayout>

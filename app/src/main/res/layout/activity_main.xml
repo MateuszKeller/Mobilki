@@ -120,5 +120,5 @@
 
     <include layout="@layout/content_main" />
     -->
-
+    <!--TODO widoczność hasła on/off -->
 </androidx.constraintlayout.widget.ConstraintLayout>
