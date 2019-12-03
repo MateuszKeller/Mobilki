@@ -57,43 +57,43 @@
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.07999998" />
 
-    <EditText
-        android:id="@+id/email"
-        android:inputType="textPersonName"
-        android:layout_width="328dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/input"
-        android:fontFamily="sans-serif"
-        android:hint="Adres e-mail"
-        android:paddingLeft="16dp"
-        android:textColor="@color/darkRed"
-        android:textColorHint="@color/greyishRed"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInText" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="328dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/input"
+            android:fontFamily="sans-serif"
+            android:hint="Adres e-mail"
+            android:inputType="textPersonName"
+            android:paddingLeft="16dp"
+            android:textColor="@color/darkRed"
+            android:textColorHint="@color/greyishRed"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logInText" />
 
     <EditText
-        android:id="@+id/password"
-        android:inputType="textPassword"
-        android:layout_width="328dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/input"
-        android:fontFamily="sans-serif"
-        android:hint="Hasło"
-        android:paddingLeft="16dp"
-        android:textColor="@color/darkRed"
-        android:textColorHint="@color/greyishRed"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+            android:id="@+id/password"
+            android:layout_width="328dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/input"
+            android:fontFamily="sans-serif"
+            android:hint="Hasło"
+            android:inputType="textPassword"
+            android:paddingLeft="16dp"
+            android:textColor="@color/darkRed"
+            android:textColorHint="@color/greyishRed"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <ImageButton
         android:id="@+id/visibilityButton"
@@ -110,12 +110,7 @@
         app:layout_constraintTop_toTopOf="@+id/password"
         app:srcCompat="@drawable/visibility" />
 
-   <!--<com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"/>
 
-    <include layout="@layout/content_main" />
-    -->
+
     <!--TODO widoczność hasła on/off -->
 </androidx.constraintlayout.widget.ConstraintLayout>
