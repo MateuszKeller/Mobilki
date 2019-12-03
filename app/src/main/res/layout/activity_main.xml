@@ -17,7 +17,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginRight="16dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Zaloguj się za pomocą danych z politechniki"
+        android:text="Zaloguj się za pomocą danych passRate politechniki"
         android:textAlignment="center"
         android:textColor="@color/basicGrey"
         android:textSize="26sp"
