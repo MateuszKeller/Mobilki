@@ -26,6 +26,19 @@ public class Manager {
         Collections.sort(professorList, Collections.<Professor>reverseOrder());
     }
 
+    //function to log in, will compare given name and passwd with database
+    public boolean logIn(String indexNum, String password){
+        String name = "admin";
+        String passwd = Utils.hash("admin");
+        if(indexNum.equals(name) && password.equals(passwd)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     public void addGrade(Professor professor, Grade grade){
         professor.addGrade(grade);
     }
