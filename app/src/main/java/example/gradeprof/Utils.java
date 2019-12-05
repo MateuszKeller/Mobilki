@@ -1,5 +1,7 @@
 package example.gradeprof;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -15,4 +17,13 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
+
+//    public static ConstraintLayout.LayoutParams but(){
+//        ConstraintLayout.LayoutParams x = new ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.MATCH_PARENT,
+//                ConstraintLayout.LayoutParams.MATCH_PARENT
+//        );
+//
+//        return  x;
+//    }
 }

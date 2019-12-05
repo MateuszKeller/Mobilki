@@ -1,3 +1,6 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="prof_bg_width">328dp</dimen>
+    <dimen name="prof_bg_height">92dp</dimen>
+
 </resources>
