@@ -6,12 +6,15 @@ import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
+import android.view.*
 import android.view.View.VISIBLE
+import android.view.Window
+import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main_screen.*
+import kotlinx.android.synthetic.main.activity_opinions.*
 
 class MainScreen : AppCompatActivity() {
 
@@ -20,11 +23,9 @@ class MainScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
-        testProf.setOnClickListener{
+        this.testProf.setOnClickListener{
         startActivity(Intent( this, Profile::class.java))}
     }
-
-
 
     fun showPopUp(view: View) {
         dimming.visibility = VISIBLE
@@ -32,6 +33,7 @@ class MainScreen : AppCompatActivity() {
         val inflater = popupMenu.menuInflater
         inflater.inflate(R.menu.menu_main, popupMenu.menu)
         popupMenu.show()
+
 
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId) {

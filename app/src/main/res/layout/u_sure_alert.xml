@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/alertBG"
+        android:layout_width="328dp"
+        android:layout_height="174dp"
+        android:background="@drawable/alert"
+        android:foregroundGravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alertTitle"
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Czy na pewno chcesz usunąć opinię?"
+        android:textAlignment="center"
+        android:textColor="@color/basicGrey"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="@+id/alertBG"
+        app:layout_constraintStart_toStartOf="@+id/alertBG"
+        app:layout_constraintTop_toTopOf="@+id/alertBG" />
+
+    <Button
+        android:id="@+id/yesButton"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:fontFamily="sans-serif-medium"
+        android:text="Tak"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/basicGrey"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="@+id/alertBG"
+        app:layout_constraintTop_toBottomOf="@+id/alertTitle" />
+
+    <Button
+        android:id="@+id/noButton"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button"
+        android:fontFamily="sans-serif-medium"
+        android:text="Nie"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/basicGrey"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/alertBG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alertTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

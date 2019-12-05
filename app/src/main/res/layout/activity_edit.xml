@@ -219,8 +219,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textM" />
 
-
     <!--TODO wyświetlanie przypisanej opinii -->
-    <!--TODO U sure? -->
     <!--TODO edycje konkretnej opinni -->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -210,11 +210,9 @@
             <View
                 android:id="@+id/opinionButton"
                 android:layout_width="328dp"
-                android:layout_height="217dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="200dp"
                 android:background="@drawable/button"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bgM" />
@@ -234,28 +232,27 @@
                     app:layout_constraintStart_toStartOf="@+id/opinionButton"
                     app:layout_constraintTop_toTopOf="@+id/opinionButton" />
 
-                <EditText
-                    android:id="@+id/opinionText"
-                    android:layout_width="328dp"
-                    android:layout_height="158dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/input"
-                    android:fontFamily="sans-serif"
-                    android:textSize="16sp"
-                    android:padding="4dp"
-                    android:textColor="@color/greyishRed"
-                    android:hint="Napisz opinię.."
-                    android:textColorHint="@color/greyishRed"
-                    android:gravity="top"
-                    app:layout_constraintEnd_toEndOf="@+id/opinionButton"
-                    app:layout_constraintStart_toStartOf="@+id/opinionButton"
-                    app:layout_constraintTop_toBottomOf="@+id/opinion" />
+            <EditText
+                android:id="@+id/opinionText"
+                android:layout_width="328dp"
+                android:layout_height="158dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="316dp"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif"
+                android:gravity="top"
+                android:hint="Napisz opinię.."
+                android:padding="4dp"
+                android:textColor="@color/greyishRed"
+                android:textColorHint="@color/greyishRed"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/opinionButton"
+                app:layout_constraintStart_toStartOf="@+id/opinionButton"
+                app:layout_constraintTop_toBottomOf="@+id/opinion"
+                android:foregroundGravity="bottom"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-
-
-    <!--TODO sensowna odleglość dolnego marginesu -->
-    <!--TODO custom checkobx -->
 </androidx.constraintlayout.widget.ConstraintLayout>

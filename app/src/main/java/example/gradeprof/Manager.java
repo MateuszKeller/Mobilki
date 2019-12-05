@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Manager {
 
+    Manager(){}
+
     private String indexNumber;
     private List<Professor> professorList;
 
@@ -28,16 +30,18 @@ public class Manager {
 
     //function to log in, will compare given name and passwd with database
     public boolean logIn(String indexNum, String password){
+
+
         String name = "admin";
-        String passwd = Utils.hash("admin");
+            String passwd= "admin";
+        //String passwd = Utils.hash("admin");
+            //System.out.println(password + Utils.hash(password)+ "\n p:" + passwd);
         if(indexNum.equals(name) && password.equals(passwd)){
             return true;
         } else {
             return false;
         }
     }
-
-
 
     public void addGrade(Professor professor, Grade grade){
         professor.addGrade(grade);

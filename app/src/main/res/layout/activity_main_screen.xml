@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainScreenLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,7 +31,6 @@
         android:background="@null"
         android:padding="1dp"
         android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="@+id/etPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu"
@@ -61,7 +59,7 @@
         android:id="@+id/testProf"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="328dp"
-        android:layout_height="88dp"
+        android:layout_height="92dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/input"
         android:radius="11dp"
@@ -77,7 +75,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-medium"
-        android:text="mgr Marian Kowalski"
+        android:text="@string/testProfName"
         android:textColor="#000"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@+id/testProf"
@@ -100,13 +98,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-medium"
         android:text="212 oceny"
         android:textColor="@color/darkGrey"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/testProf"
-        app:layout_constraintEnd_toEndOf="@+id/testProf" />
+        app:layout_constraintEnd_toEndOf="@+id/testProf"
+        app:layout_constraintTop_toBottomOf="@+id/testProfDepartment" />
 
     <View
         android:id="@+id/dimming"
@@ -115,10 +112,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#000"
-        android:alpha="0.3"
+        android:alpha="0.4"
         android:visibility="gone"/>
 
     <!--TODO wyszukiwanie -->
-    <!--TODO wypisywanie prowadzących passRate listy-->
+    <!--TODO wypisywanie prowadzących z listy-->
     <!--TODO poprawić menu i dimming -->
 </androidx.constraintlayout.widget.ConstraintLayout>

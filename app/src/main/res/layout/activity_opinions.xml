@@ -74,9 +74,7 @@
         app:layout_constraintStart_toStartOf="@+id/opinion"
         app:layout_constraintTop_toTopOf="@+id/opinion" />
 
-    <!--TODO tytul -->
     <!--TODO lista opinii -->
-    <!--TODO the X -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
