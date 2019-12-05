@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     /// TODO delete later
     // for faster testing Toast msg still appearing
-    val OFF = true
+    val OFF = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

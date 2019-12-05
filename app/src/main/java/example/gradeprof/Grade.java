@@ -2,6 +2,7 @@ package example.gradeprof;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Grade implements Comparable <Grade>{
 
@@ -9,25 +10,38 @@ public class Grade implements Comparable <Grade>{
     private float availability;
     private float merits;
     private String opinion;
-    private int likes;
     private List<String> whoLiked;
+    private String author;
+    private final UUID uid = UUID.randomUUID();
 
-
-    public Grade(float passRate, float availability, float merits) {
+    public Grade(float passRate, float availability, float merits, String author) {
         this.passRate = passRate;
         this.availability = availability;
         this.merits = merits;
+        this.author = author;
     }
 
-    public Grade(float passRate, float availability, float merits, String opinion) {
+    public Grade(float passRate, float availability, float merits, String opinion, String author) {
         this.passRate = passRate;
         this.availability = availability;
         this.merits = merits;
         this.opinion = opinion;
-        this.likes = 0;
         this.whoLiked = new ArrayList<>();
+        this.author = author;
     }
 
+    public String getAuthor(){
+        return author;
+    }
+
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public UUID getUID(){
+        return uid;
+    }
     public float getPassRate() { return passRate; }
     public void setPassRate(float passRate) { this.passRate = passRate; }
     public float getAvailability() { return availability; }
@@ -36,15 +50,13 @@ public class Grade implements Comparable <Grade>{
     public void setMerits(float merits) { this.merits = merits; }
     public String getOpinion() { return opinion; }
     public void setOpinion(String opinion) { this.opinion = opinion; }
-    public int getLikes() { return likes; }
-    public void setLikes(int likes) { this.likes = likes; }
+    public int getLikes() { return whoLiked.size(); }
+//    public void setLikes(int likes) { this.likes = likes; }
     public void likeTap(String indexNumber){
         if (whoLiked.contains(indexNumber)) {
             whoLiked.remove(indexNumber);
-            likes--;
         } else {
             whoLiked.add(indexNumber);
-            likes++;
         }
     }
 

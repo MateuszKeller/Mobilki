@@ -2,17 +2,17 @@ package example.gradeprof;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utils {
 
-    public static String hash(String toBeHashed){
+    public static byte[] hash(String toBeHashed){
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
-            byte[] pwHash = digest.digest(toBeHashed.getBytes());
-            String ret = pwHash.toString();
-            return ret;
+            byte[] pwHash = digest.digest(toBeHashed.getBytes(StandardCharsets.UTF_8));
+            return pwHash;
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
