@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainScreenLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu"
-        android:onClick="showPopUp"/>
+        android:onClick="showPopupMenu"/>
 
     <EditText
         android:id="@+id/searchBox"
@@ -60,30 +61,40 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="328dp"
         android:layout_height="92dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/input"
         android:radius="11dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBox" />
 
+    <ImageView
+        android:id="@+id/testProfPhoto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/testProf"
+        app:layout_constraintTop_toTopOf="@+id/testProf"
+        app:srcCompat="@drawable/temp_photo" />
+
     <TextView
         android:id="@+id/testProfName"
-        android:layout_width="wrap_content"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/testProfName"
-        android:textColor="#000"
+        android:text= "prof. hab. Maksymilian Kasiunkiewiczowanikoworski"
+        android:textColor="@color/buttonRed"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="@+id/testProf"
+        app:layout_constraintStart_toEndOf="@+id/testProfPhoto"
         app:layout_constraintTop_toTopOf="@+id/testProf" />
 
     <TextView
         android:id="@+id/testProfDepartment"
-        android:layout_width="wrap_content"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:fontFamily="sans-serif-medium"
@@ -95,11 +106,12 @@
 
     <TextView
         android:id="@+id/testProfGrades"
-        android:layout_width="wrap_content"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:fontFamily="sans-serif-medium"
         android:text="212 oceny"
+        android:textAlignment="textEnd"
         android:textColor="@color/darkGrey"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/testProf"
