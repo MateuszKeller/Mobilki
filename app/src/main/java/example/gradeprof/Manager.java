@@ -12,8 +12,18 @@ import java.util.List;
 
 public class Manager {
 
+    private static Manager manager = null;
     private String indexNumber;
     private List<Professor> professorList;
+
+    public static void initialize(){
+
+    }
+
+    public static Manager getInstance(){
+        return manager;
+    }
+
 
     public Manager(){
         indexNumber = "";
