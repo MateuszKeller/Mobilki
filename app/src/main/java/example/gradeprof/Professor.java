@@ -1,14 +1,17 @@
 package example.gradeprof;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Professor implements Comparable<Professor>{
+public class Professor implements Comparable<Professor>, Serializable {
     private String ID;
     private String name;
     private String department;
+    private String info;
     private List<Grade> grades;
+
 
 
     public float averagePassRate(){
@@ -38,11 +41,12 @@ public class Professor implements Comparable<Professor>{
         return res;
     }
 
-    public Professor(String name, String department, List<Grade> grades, String ID) {
+    public Professor(String name, String department, String info, List<Grade> grades, String ID) {
         this.name = name;
         this.department = department;
         this.grades = new ArrayList<Grade>();
         this.ID = ID;
+        this.info = info;
     }
 
     public String getID(){
@@ -58,6 +62,8 @@ public class Professor implements Comparable<Professor>{
     public void removeGrade(Grade grade){
                 grades.remove(grade);
     }
+    public String getInfo() { return info; }
+    public void setInfo(String info) { this.info = info; }
 
     //sorting grades according to likes number descending
     public void sortGrades(){
@@ -70,4 +76,6 @@ public class Professor implements Comparable<Professor>{
         Integer otherProf = other.getGrades().size();
         return thisProf.compareTo(otherProf);
     }
+
+
 }

@@ -8,15 +8,22 @@ import kotlinx.android.synthetic.main.activity_profile.closeButton
 
 class GradeForm : AppCompatActivity(){
 
+    lateinit var professor: Professor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grade_form)
 
+        val i = intent
+        professor = i.getSerializableExtra("professor") as Professor
 
         closeButton.setOnClickListener{
-            startActivity(Intent( this, Profile::class.java))}
+            val intent = Intent( this, Profile::class.java)
+            intent.putExtra("professor", professor)
+            startActivity(intent)}
 
         acceptButton.setOnClickListener{
-            startActivity(Intent( this, UserName::class.java))}
+            val intent = Intent( this, UserName::class.java)
+            intent.putExtra("professor", professor)
+            startActivity(intent)}
     }
 }

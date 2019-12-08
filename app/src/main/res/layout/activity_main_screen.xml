@@ -56,14 +56,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
+    <!--
     <Button
         android:id="@+id/testProf"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="328dp"
         android:layout_height="92dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/input"
-        android:radius="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-medium"
-        android:text= "prof. hab. Maksymilian Kasiunkiewiczowanikoworski"
+        android:text= "@string/testProfName"
         android:textColor="@color/buttonRed"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/testProfPhoto"
@@ -96,12 +96,12 @@
         android:id="@+id/testProfDepartment"
         android:layout_width="224dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="sans-serif-medium"
         android:text="Wydział: FTIMS"
         android:textColor="@color/darkGrey"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/testProf"
+        app:layout_constraintStart_toEndOf="@+id/testProfPhoto"
         app:layout_constraintTop_toBottomOf="@+id/testProfName" />
 
     <TextView
@@ -117,6 +117,8 @@
         app:layout_constraintEnd_toEndOf="@+id/testProf"
         app:layout_constraintTop_toBottomOf="@+id/testProfDepartment" />
 
+        -->
+
     <View
         android:id="@+id/dimming"
         android:layout_width="match_parent"
@@ -125,6 +127,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="#000"
         android:alpha="0.4"
+        android:translationZ="10px"
         android:visibility="gone"/>
 
     <!--TODO wyszukiwanie -->

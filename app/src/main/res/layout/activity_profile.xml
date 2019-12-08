@@ -71,8 +71,8 @@
 
     <TextView
         android:id="@+id/informationText"
-        android:layout_width="316sp"
-        android:layout_height="57sp"
+        android:layout_width="@dimen/bg_width"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/testProfInfo"
