@@ -264,7 +264,4 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
 
         constrain(layout)
     }
-
-
-
 }

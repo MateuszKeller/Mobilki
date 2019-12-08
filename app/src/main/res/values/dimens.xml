@@ -1,9 +1,12 @@
 <resources>
+    <dimen name="mama">1dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="bg_width">328dp</dimen>
     <dimen name="bg_height">92dp</dimen>
     <dimen name="prof_tx_width">224dp</dimen>
     <dimen name="photo">80dp</dimen>
+    <dimen name="author_width">226dp</dimen>
+
 
     <dimen name="font24">24sp</dimen>
     <dimen name="font22">22sp</dimen>

@@ -131,6 +131,5 @@
         android:visibility="gone"/>
 
     <!--TODO wyszukiwanie -->
-    <!--TODO wypisywanie prowadzących z listy-->
     <!--TODO poprawić menu i dimming -->
 </androidx.constraintlayout.widget.ConstraintLayout>
