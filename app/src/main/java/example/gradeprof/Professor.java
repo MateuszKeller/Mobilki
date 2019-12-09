@@ -3,14 +3,14 @@ package example.gradeprof;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+
 
 public class Professor implements Comparable<Professor>, Serializable {
     private String ID;
     private String name;
     private String department;
     private String info;
-    private List<Grade> grades;
+    private ArrayList<Grade> grades;
 
 
 
@@ -41,10 +41,14 @@ public class Professor implements Comparable<Professor>, Serializable {
         return res;
     }
 
-    public Professor(String name, String department, String info, List<Grade> grades, String ID) {
+    public Professor(String name, String department, String info, ArrayList<Grade> grades, String ID) {
         this.name = name;
         this.department = department;
+        if(grades != null)
+            this.grades = grades;
+        else
         this.grades = new ArrayList<Grade>();
+
         this.ID = ID;
         this.info = info;
     }
@@ -56,8 +60,8 @@ public class Professor implements Comparable<Professor>, Serializable {
     public void setName(String name) { this.name = name; }
     public String getDepartment() { return department; }
     public void setDepartment(String department) { this.department = department; }
-    public List<Grade> getGrades() { return grades; }
-    public void setGrades(List<Grade> grades) { this.grades = grades; }
+    public ArrayList<Grade> getGrades() { return grades; }
+    public void setGrades(ArrayList<Grade> grades) { this.grades = grades; }
     public void addGrade( Grade grade) { grades.add(grade); }
     public void removeGrade(Grade grade){
                 grades.remove(grade);

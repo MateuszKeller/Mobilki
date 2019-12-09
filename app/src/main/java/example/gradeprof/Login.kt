@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    /// TODO delete later
+    /// TODO usunać
     // for faster testing Toast msg still appearing
     val logOFF = true
 
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //TODO rzucać index
         logInButton.setOnClickListener {
             if (logOFF) startActivity(Intent(this, MainScreen::class.java))
 
@@ -31,17 +32,17 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Nieprawidłowe dane logowania!", Toast.LENGTH_SHORT ).show()
         }
 
-        var isVisible = false
-        visibilityButton.setOnClickListener {
-            if (!isVisible)
-            {
-                visibilityButton.alpha = 1.0f
-                isVisible = true
-            } else
-            {
-                visibilityButton.alpha = 0.5f
-                isVisible = false
-            }
-        }
+//        var isVisible = false
+//        visibilityButton.setOnClickListener {
+//            if (!isVisible)
+//            {
+//                visibilityButton.alpha = 1.0f
+//                isVisible = true
+//            } else
+//            {
+//                visibilityButton.alpha = 0.5f
+//                isVisible = false
+//            }
+//        }
     }
 }

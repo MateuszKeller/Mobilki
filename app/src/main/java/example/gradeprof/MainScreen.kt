@@ -26,35 +26,54 @@ class MainScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
-        fillList()
+        testFill()
         generatingButtons()
     }
 
-    fun fillList(){
+    fun testFill(){
+
+        var opinions = ArrayList<Grade>()
+        opinions.add(Grade(4.5f, 3.1f, 2.2f,"Fantastyczny prowadzący, dzięki niemu zostałem lekarzem.","Malkontent"))
+        opinions.add(Grade(4.5f, 3.1f, 2.2f,"Super prowadzący, tak mi się podoba, że trzeci raz chodzę na przedmiot!!!","Spadochroniarz"))
+        opinions.add(Grade(4.5f, 3.1f, 2.2f,"Fantastyczny prowadzący, dzięki niemu zostałem lekarzem.","Malkontent"))
+        opinions.add(Grade(4.5f, 3.1f, 2.2f,"Super prowadzący, tak mi się podoba, że trzeci raz chodzę na przedmiot!!!","Spadochroniarz"))
 
         pList.add(Professor(
             resources.getString(R.string.testProfName),
             "FTIMS",
             resources.getString(R.string.testProfInfo),
-            ArrayList<Grade>(),
+            opinions,
             "prof1")
         )
         pList.add(Professor(
             resources.getString(R.string.tPN1),
             "FTIMS",
             resources.getString(R.string.TPI1),
-            ArrayList<Grade>(),
+            opinions,
             "prof2")
         )
         pList.add(Professor(
             resources.getString(R.string.tPN2),
             "FTIMS",
             resources.getString(R.string.TPI2),
-            ArrayList<Grade>(),
+            opinions,
             "prof3")
         )
+        pList.add(Professor(
+            resources.getString(R.string.testProfName),
+            "FTIMS",
+            resources.getString(R.string.testProfInfo),
+            opinions,
+            "prof4")
+        )
+        pList.add(Professor(
+            resources.getString(R.string.tPN1),
+            "FTIMS",
+            resources.getString(R.string.TPI1),
+            opinions,
+            "prof5")
+        )
     }
-
 
     private fun generatingButtons(){
 
@@ -65,7 +84,7 @@ class MainScreen : AppCompatActivity() {
         }
 
         for (b in bList)
-            b.create(findViewById(R.id.mainScreenLayout))
+            b.create(findViewById(R.id.innerScrollLayout))
     }
 
     fun showPopupMenu(view: View) {
@@ -137,17 +156,19 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         constraint.clone(layout)
 
         val upperButtonID: Int
-        var margin: Int
-        if(id == 10){
-            upperButtonID = R.id.searchBox
-            margin = (28 * dpFactor).toInt()
+        var margin = 0
+        val marginSide : Int
+        if(id == 10) {
+            upperButtonID = ConstraintSet.PARENT_ID
+            marginSide = ConstraintSet.TOP
         }
         else{
             upperButtonID = id - 9
             margin = (8 * dpFactor).toInt()
+            marginSide = ConstraintSet.BOTTOM
         }
 
-        constraint.connect(bg.id, ConstraintSet.TOP, upperButtonID, ConstraintSet.BOTTOM, margin)
+        constraint.connect(bg.id, ConstraintSet.TOP, upperButtonID, marginSide, margin)
         constraint.connect(bg.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0)
         constraint.connect(bg.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0)
 
@@ -175,7 +196,6 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         bg.layoutParams = ConstraintLayout.LayoutParams(
             context.resources.getDimension(R.dimen.bg_width).toInt(),
             calcHeight())
-
 
         bg.setOnClickListener{
             val intent = Intent( context, Profile::class.java)
