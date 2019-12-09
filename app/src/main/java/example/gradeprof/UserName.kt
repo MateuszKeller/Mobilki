@@ -9,15 +9,22 @@ import java.util.*
 
 class UserName : AppCompatActivity() {
 
+    lateinit var professor: Professor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_name)
 
+        val i = intent
+        professor = i.getSerializableExtra("professor") as Professor
 
         closeButton.setOnClickListener{
-            startActivity(Intent( this, GradeForm::class.java))}
+            val intent = Intent( this, GradeForm::class.java)
+            intent.putExtra("professor", professor)
+            startActivity(intent)}
 
         acceptButton.setOnClickListener{
-            startActivity(Intent( this, Profile::class.java))}
+            val intent = Intent( this, Profile::class.java)
+            intent.putExtra("professor", professor)
+            startActivity(intent)}
     }
 }

@@ -13,20 +13,15 @@
     <string name="testProfD">3.395</string>
     <string name="testProfM">2.1</string>
 
+    <string name="testLong">prof. hab. Maksymilian Kasiunkiewiczowanikoworski</string>
 
     <string name="tPN1">dr hab. Lech Roch Pawlak</string>
     <string name="TPI1">Nie lubiem pladzkuf.</string>
     <string name="TPDAT1">28.08.9999</string>
-    <string name="PTZ1">1.0</string>
-    <string name="TPD1">4</string>
-    <string name="TPM1">3.1</string>
 
     <string name="tPN2">prof. Adam Cienki</string>
     <string name="TPI2">Poprzez rozważania na temat etymologii egzystencjalnej placków jestem w stanie stwiedzić iż skłaniam się ku możliwości albowiem posiadam pewną zażyłość względem placków jednakże konwencjonalną conajwyżej.</string>
     <string name="TPDAT2">01.01.0000</string>
-    <string name="PTZ2">5</string>
-    <string name="TPD2">5</string>
-    <string name="TPM2">5</string>
 
     <string name="ON1">Malkontent</string>
     <string name="OT1">Fantastyczny prowadzący, dzięki niemu zostałem lekarzem.</string>

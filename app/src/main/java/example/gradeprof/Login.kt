@@ -11,14 +11,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     /// TODO delete later
     // for faster testing Toast msg still appearing
-    val OFF = false
+    val logOFF = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         logInButton.setOnClickListener {
-            if (OFF) startActivity(Intent(this, MainScreen::class.java))
+            if (logOFF) startActivity(Intent(this, MainScreen::class.java))
 
             val login = email.text.toString()
             val passw = password.text.toString()

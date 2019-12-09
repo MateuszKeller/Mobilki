@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profileLayout"
     android:layout_width="match_parent"
     android:background="@color/basicRed"
@@ -32,7 +33,7 @@
         android:textColor="@color/basicGrey"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/photo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -71,8 +72,8 @@
 
     <TextView
         android:id="@+id/informationText"
-        android:layout_width="316sp"
-        android:layout_height="57sp"
+        android:layout_width="@dimen/bg_width"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/testProfInfo"
@@ -215,7 +216,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textM" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/photo"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
@@ -223,6 +224,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/temp_photo" />
+
+    <ImageView
+        android:id="@+id/opinionBG"
+        android:layout_width="@dimen/bg_width"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opinions"
+        app:srcCompat="@drawable/input" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="@dimen/author_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Malkontent"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/opinionBG"
+        app:layout_constraintTop_toTopOf="@+id/opinionBG" />
+
+    <TextView
+        android:id="@+id/opinionText"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:text="Fantastyczny prowadzący, dzięki niemu zostałem lekarzem."
+        android:textSize="14sp"
+        android:textColor="@color/darkRed"
+        app:layout_constraintEnd_toEndOf="@+id/opinionBG"
+        app:layout_constraintStart_toStartOf="@+id/opinionBG"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+    <TextView
+        android:id="@+id/likes"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:textAlignment="center"
+        android:text="215"
+        android:textSize="16sp"
+        android:textColor="@color/buttonRed"
+        app:layout_constraintEnd_toEndOf="@+id/opinionBG"
+        app:layout_constraintTop_toTopOf="@+id/opinionBG" />
+
+    <ImageButton
+        android:id="@+id/up"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/likes"
+        app:layout_constraintTop_toTopOf="@+id/opinionBG"
+        app:srcCompat="@drawable/ic_1up"
+        android:onClick="likeIt"/>
+        <!-- android:onClick="likeIt" -->
 
     <!--TODO opinie -->
 </androidx.constraintlayout.widget.ConstraintLayout>
