@@ -12,7 +12,7 @@ public class Grade implements Comparable <Grade>{
     private String opinion;
     private List<String> whoLiked;
     private String author;
-    private final UUID uid = UUID.randomUUID();
+    private final String uid = UUID.randomUUID().toString();
 
     public Grade(float passRate, float availability, float merits, String author) {
         this.passRate = passRate;
@@ -39,7 +39,7 @@ public class Grade implements Comparable <Grade>{
         this.author = author;
     }
 
-    public UUID getUID(){
+    public String getUID(){
         return uid;
     }
     public float getPassRate() { return passRate; }
@@ -52,6 +52,9 @@ public class Grade implements Comparable <Grade>{
     public void setOpinion(String opinion) { this.opinion = opinion; }
     public int getLikes() { return whoLiked.size(); }
 //    public void setLikes(int likes) { this.likes = likes; }
+    public void setWhoLiked(List<String> whoLiked){
+        this.whoLiked = whoLiked;
+    }
     public void likeTap(String indexNumber){
         if (whoLiked.contains(indexNumber)) {
             whoLiked.remove(indexNumber);

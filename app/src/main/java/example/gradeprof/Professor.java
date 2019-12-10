@@ -48,6 +48,13 @@ public class Professor implements Comparable<Professor>, Serializable {
         this.ID = ID;
         this.info = info;
     }
+    public Professor(String ID, String name, String department, String info) {
+        this.name = name;
+        this.department = department;
+        this.grades = new ArrayList<Grade>();
+        this.ID = ID;
+        this.info = info;
+    }
 
     public String getID(){
         return ID;

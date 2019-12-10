@@ -1,12 +1,15 @@
 package example.gradeprof;
 
-import android.os.Build;
+import androidx.annotation.NonNull;
 
-import androidx.annotation.RequiresApi;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,20 +18,109 @@ public class Manager {
     private static Manager manager = null;
     private String indexNumber;
     private List<Professor> professorList;
+    private FirebaseDatabase base = FirebaseDatabase.getInstance();
 
-    public static void initialize(){
 
+    public List<Professor> getProfessorList(){
+        return professorList;
     }
-
-    public static Manager getInstance(){
-        return manager;
-    }
-
-
     public Manager(){
         indexNumber = "";
         professorList = new ArrayList<>();
         //read from database/xml here
+    }
+
+
+    public void getProfs(){
+        System.out.println("in get Profs");
+        professorList = new ArrayList<>();
+        DatabaseReference ref = base.getReference();
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                int i = 0;
+//                int j = 0;
+
+                for(DataSnapshot childProfList : dataSnapshot.getChildren()) {
+//                    i++;
+//                    System.out.println( "iteracja " + i + ": "+ childProfList.getValue().toString());
+                    for(DataSnapshot childProf : childProfList.getChildren()) {
+
+//                        System.out.println("wewn. iteracja " + j + ": " + childProf.getValue().toString());
+                        String name = childProf.child("name").getValue().toString();
+                        String id = childProf.getKey().toString();
+                        String department = childProf.child("department").getValue().toString();
+                        String info = childProf.child("info").getValue().toString();
+//                        System.out.println("i: " + i + " name: " + name + " id: " + id + "dept: " + department + "info: " + info);
+//                        j++;
+                        ///////////////
+                        Professor profTemp = new Professor(id, name, department, info);
+                        List<Grade> gradesTempList = new ArrayList<>();
+                        DataSnapshot childGradesList = childProf.child("grades");
+                        Grade tempGrade;
+                        for (DataSnapshot childGrade : childGradesList.getChildren()) {
+                            if (childGrade != null) {
+                                String gradeId = nullReplacer(childGrade.getKey().toString());
+                                String passRate = nullReplacer(childGrade.child("passRate").getValue());
+                                String availability = nullReplacer(childGrade.child("availability").getValue());
+                                String merits = nullReplacer(childGrade.child("merits").getValue());
+                                String opinion = nullReplacer(childGrade.child("opinion").getValue());
+                                String author = nullReplacer(childGrade.child("author").getValue());
+                                System.out.println("gradeId: " + gradeId +
+                                        " passRate: " + passRate + " availability: " + availability +
+                                        " merits: " + merits +
+                                        " opinion: " + opinion);
+                                tempGrade = new Grade(new Float(passRate), new Float(availability), new Float(merits), author);
+                                List<String> likesTempList = new ArrayList<>();
+                                DataSnapshot childLikesList = childGrade.child("likes");
+                                if(childLikesList !=  null) {
+                                    for (DataSnapshot childLike : childLikesList.getChildren()) {
+                                        String likeTemp = childLike.getKey().toString();
+                                        likesTempList.add(likeTemp);
+                                    }
+                                    tempGrade.setWhoLiked(likesTempList);
+                                }
+                                gradesTempList.add(tempGrade);
+                            }
+                        }
+                        profTemp.setGrades(gradesTempList);
+                        isNull(profTemp, "profTemp");
+                        professorList.add(profTemp);
+                        System.out.println("rozmiar professorList: " + professorList.size());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        ref.addValueEventListener(listener);
+        System.out.println("ilosc profow: " + professorList.size());
+
+
+        System.out.println("rozmiar professorList 2: " + professorList.size());
+
+
+    }
+
+    public void isNull(Object o, String name){
+        if(o==null){
+            System.out.println(name + " is null!!!");
+        }
+    }
+
+    public void isEmpty(List<Object> list, String name){
+        if(list.isEmpty()){
+            System.out.println(name + " list is empty!!!");
+        }
+    }
+    public String nullReplacer(Object toCheck){
+        if(toCheck != null){
+            return toCheck.toString();
+        } else return "";
     }
 
     public String getIndexNumber() {

@@ -32,6 +32,9 @@ class MainScreen : AppCompatActivity() {
 
     fun fillList(){
 
+        val m = Manager();
+        m.getProfs()
+
         pList.add(Professor(
             resources.getString(R.string.testProfName),
             "FTIMS",
