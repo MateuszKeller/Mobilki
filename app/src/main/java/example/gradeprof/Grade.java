@@ -1,10 +1,11 @@
 package example.gradeprof;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Grade implements Comparable <Grade>{
+public class Grade implements Comparable <Grade>, Serializable {
 
     private float passRate;
     private float availability;
@@ -13,6 +14,7 @@ public class Grade implements Comparable <Grade>{
     private List<String> whoLiked;
     private String author;
     private final String uid = UUID.randomUUID().toString();
+    private int tempLikes = 0;
 
     public Grade(float passRate, float availability, float merits, String author) {
         this.passRate = passRate;
@@ -33,8 +35,6 @@ public class Grade implements Comparable <Grade>{
     public String getAuthor(){
         return author;
     }
-
-
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -51,17 +51,24 @@ public class Grade implements Comparable <Grade>{
     public String getOpinion() { return opinion; }
     public void setOpinion(String opinion) { this.opinion = opinion; }
     public int getLikes() { return whoLiked.size(); }
-//    public void setLikes(int likes) { this.likes = likes; }
     public void setWhoLiked(List<String> whoLiked){
         this.whoLiked = whoLiked;
     }
-    public void likeTap(String indexNumber){
-        if (whoLiked.contains(indexNumber)) {
+    public boolean likeTap(String indexNumber){
+        if (isLiked(indexNumber)) {
             whoLiked.remove(indexNumber);
+            return false;
         } else {
             whoLiked.add(indexNumber);
+            return true;
         }
     }
+    public boolean isLiked(String indexNumber){
+        return whoLiked.contains(indexNumber);
+    }
+
+    public void setTempLikes(int likes) { this.tempLikes = likes; }
+    public int getTempLikes() { return tempLikes; }
 
     @Override
     public int compareTo(Grade other) {

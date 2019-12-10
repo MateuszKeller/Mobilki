@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    /// TODO delete later
+    /// TODO usunać
     // for faster testing Toast msg still appearing
     val logOFF = false
 
@@ -18,32 +18,39 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        this.applicationContext
+        //TODO rzucać index
         logInButton.setOnClickListener {
-            if (logOFF) startActivity(Intent(this, MainScreen::class.java))
+            if (logOFF){
+                val intent = Intent(this, MainScreen::class.java)
+                intent.putExtra("index", "admin")
+                startActivity(intent)
+            }
 
             val login = email.text.toString()
             val passw = password.text.toString()
             val m = Manager()
 
+            if(m.logIn(login, passw)){
 
-            if(m.logIn(login, passw))
-                startActivity(Intent(this, MainScreen::class.java))
+                val intent = Intent(this, MainScreen::class.java)
+                intent.putExtra("index", login)
+                startActivity(intent)
+            }
             else
                 Toast.makeText(applicationContext, "Nieprawidłowe dane logowania!", Toast.LENGTH_SHORT ).show()
         }
 
-        var isVisible = false
-        visibilityButton.setOnClickListener {
-            if (!isVisible)
-            {
-                visibilityButton.alpha = 1.0f
-                isVisible = true
-            } else
-            {
-                visibilityButton.alpha = 0.5f
-                isVisible = false
-            }
-        }
+//        var isVisible = false
+//        visibilityButton.setOnClickListener {
+//            if (!isVisible)
+//            {
+//                visibilityButton.alpha = 1.0f
+//                isVisible = true
+//            } else
+//            {
+//                visibilityButton.alpha = 0.5f
+//                isVisible = false
+//            }
+//        }
     }
 }

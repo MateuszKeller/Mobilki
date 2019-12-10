@@ -13,5 +13,8 @@
 
     <color name="basicGrey">#B2B3B3</color>
     <color name="darkGrey">#707070</color>
+    <color name="redishGrey">#B17171</color>
+
+    <color name="dark">#332524</color>
 
 </resources>

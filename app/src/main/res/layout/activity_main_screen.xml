@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainScreenLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -56,18 +55,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <!--
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="196dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBox">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/innerScrollLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+<!--
     <Button
         android:id="@+id/testProf"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="328dp"
         android:layout_height="92dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBox" />
+        app:layout_constraintTop_toTopOf="@+id/innerScrollLayout" />
 
     <ImageView
         android:id="@+id/testProfPhoto"
@@ -116,8 +131,10 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/testProf"
         app:layout_constraintTop_toBottomOf="@+id/testProfDepartment" />
+-->
 
-        -->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <View
         android:id="@+id/dimming"
