@@ -19,15 +19,22 @@ class MainActivity : AppCompatActivity() {
 
         //TODO rzucać index
         logInButton.setOnClickListener {
-            if (logOFF) startActivity(Intent(this, MainScreen::class.java))
+            if (logOFF){
+                val intent = Intent(this, MainScreen::class.java)
+                intent.putExtra("index", "admin")
+                startActivity(intent)
+            }
 
             val login = email.text.toString()
             val passw = password.text.toString()
             val m = Manager()
 
+            if(m.logIn(login, passw)){
 
-            if(m.logIn(login, passw))
-                startActivity(Intent(this, MainScreen::class.java))
+                val intent = Intent(this, MainScreen::class.java)
+                intent.putExtra("index", login)
+                startActivity(intent)
+            }
             else
                 Toast.makeText(applicationContext, "Nieprawidłowe dane logowania!", Toast.LENGTH_SHORT ).show()
         }

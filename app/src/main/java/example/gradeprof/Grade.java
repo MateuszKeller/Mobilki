@@ -53,12 +53,17 @@ public class Grade implements Comparable <Grade>, Serializable {
     public String getOpinion() { return opinion; }
     public void setOpinion(String opinion) { this.opinion = opinion; }
     public int getLikes() { return whoLiked.size(); }
-    public void likeTap(String indexNumber){
-        if (whoLiked.contains(indexNumber)) {
+    public boolean likeTap(String indexNumber){
+        if (isLiked(indexNumber)) {
             whoLiked.remove(indexNumber);
+            return false;
         } else {
             whoLiked.add(indexNumber);
+            return true;
         }
+    }
+    public boolean isLiked(String indexNumber){
+        return whoLiked.contains(indexNumber);
     }
 
     public void setTempLikes(int likes) { this.tempLikes = likes; }

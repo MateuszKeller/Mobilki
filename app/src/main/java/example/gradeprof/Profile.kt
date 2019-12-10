@@ -6,9 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -21,24 +19,29 @@ class Profile : AppCompatActivity() {
     lateinit var professor: Professor
     lateinit var gList: ArrayList<Grade>
     var oList = ArrayList<OpinionElement>()
+    lateinit var user: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
         val i = intent
         professor = i.getSerializableExtra("professor") as Professor
+        user = i.getStringExtra("index") as String
         gList = professor.grades
 
         setData()
         generatingOpinions()
 
         closeButton.setOnClickListener {
-            startActivity(Intent(this, MainScreen::class.java))
+            val intent = Intent(this, MainScreen::class.java)
+            intent.putExtra("index", user)
+            startActivity(intent)
         }
 
         gradeButton.setOnClickListener {
             val intent = Intent(this, GradeForm::class.java)
             intent.putExtra("professor", professor)
+            intent.putExtra("index", user)
             startActivity(intent)
         }
     }
@@ -58,36 +61,31 @@ class Profile : AppCompatActivity() {
         var id = 0
         for (g in gList) {
             id += 10
-            oList.add(OpinionElement(id, this@Profile, g))
+            oList.add(OpinionElement(id, this@Profile, g, user))
         }
-
         for (o in oList)
             o.create(findViewById(R.id.innerScrollLayout))
     }
-
-    //fun likeIt(view: View){ findViewById<TextView>(R.id.likes).text = (findViewById<TextView>(R.id.likes).text.toString().toInt() + 1).toString() }
 }
 
-
 ///-------------------------------------------------------------------------------------------------
-class OpinionElement(id : Int, context: Context, grade: Grade) {
+class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
 
     var opinion= grade
     var id= id
     var context= context
-    var bg = ImageView(context)
-    var user = TextView(context)
+    val user = user
+    var author = TextView(context)
     var text = TextView(context)
     var likes = TextView(context)
     var upButton = ImageButton(context)
 
     val dpFactor= context.resources.displayMetrics.density
     init {
-        bg.id = id + 1
-        user.id = id + 2
-        text.id = id + 3
-        likes.id = id + 4
-        upButton.id = id + 5
+        text.id = id + 1
+        author.id = id + 2
+        likes.id = id + 3
+        upButton.id = id + 4
 
         System.out.println(toString())
     }
@@ -95,11 +93,10 @@ class OpinionElement(id : Int, context: Context, grade: Grade) {
     override fun toString(): String{
 
         val ret = StringBuilder()
-        ret.append("OpinionElement: i").append(id).append(" b")
-            .append(bg.id).append(" p")
-            .append(user.id).append(" n")
-            .append(text.id).append(" d")
-            .append(likes.id).append(" g")
+        ret.append("OpinionElement: i").append(id).append(" t")
+            .append(text.id).append(" u")
+            .append(author.id).append(" l")
+            .append(likes.id).append(" u")
             .append(upButton.id).append("\n")
             .append("Opinion: ").append(opinion.opinion)
 
@@ -108,12 +105,10 @@ class OpinionElement(id : Int, context: Context, grade: Grade) {
 
     fun setData(){
 
-        makeUser()
+        makeAuthor()
         makeText()
         makeLikes()
         makeUpButton()
-        makeBG()
-
     }
 
     fun constrain(layout: ConstraintLayout){
@@ -130,58 +125,46 @@ class OpinionElement(id : Int, context: Context, grade: Grade) {
             marginSide = ConstraintSet.BOTTOM
         }
 
-        constraint.connect(bg.id, ConstraintSet.TOP, upperOpinionID, marginSide, margin)
-        constraint.connect(bg.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0)
-        constraint.connect(bg.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0)
+        constraint.connect(text.id, ConstraintSet.TOP, upperOpinionID, marginSide, margin)
+        constraint.connect(text.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0)
+        constraint.connect(text.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0)
 
         margin = context.resources.getDimension(R.dimen.fab_margin).toInt()
-        constraint.connect(user.id, ConstraintSet.TOP, bg.id, ConstraintSet.TOP, margin/4)
-        constraint.connect(user.id, ConstraintSet.LEFT, bg.id, ConstraintSet.LEFT, margin/4)
+        constraint.connect(author.id, ConstraintSet.TOP, text.id, ConstraintSet.TOP, margin/4)
+        constraint.connect(author.id, ConstraintSet.LEFT, text.id, ConstraintSet.LEFT, margin/4)
 
-        constraint.connect(text.id, ConstraintSet.TOP, user.id, ConstraintSet.BOTTOM, margin/4)
-        constraint.connect(text.id, ConstraintSet.LEFT, bg.id, ConstraintSet.LEFT, 0)
-        constraint.connect(text.id, ConstraintSet.RIGHT, bg.id, ConstraintSet.RIGHT, 0)
+        constraint.connect(likes.id, ConstraintSet.TOP, text.id, ConstraintSet.TOP, margin/4)
+        constraint.connect(likes.id, ConstraintSet.RIGHT, text.id, ConstraintSet.RIGHT, margin)
 
-        constraint.connect(likes.id, ConstraintSet.TOP, bg.id, ConstraintSet.TOP, margin/4)
-        constraint.connect(likes.id, ConstraintSet.RIGHT, bg.id, ConstraintSet.RIGHT, margin)
-
-        constraint.connect(upButton.id, ConstraintSet.TOP, bg.id, ConstraintSet.TOP, margin/4)
+        constraint.connect(upButton.id, ConstraintSet.TOP, text.id, ConstraintSet.TOP, margin/4)
         constraint.connect(upButton.id, ConstraintSet.RIGHT, likes.id, ConstraintSet.LEFT, margin/4)
 
         constraint.applyTo(layout)
     }
 
-    fun makeBG(){
+    fun makeAuthor(){
 
-        bg.background = context.resources.getDrawable(R.drawable.input, null)
-        bg.translationZ = 0.1f
+        author.text = opinion.author
+        author.translationZ = 6f
 
-        bg.layoutParams = ConstraintLayout.LayoutParams(
-            context.resources.getDimension(R.dimen.bg_width).toInt(),
-            (71 * dpFactor).toInt())
-            //calcHeight())
-    }
-
-    fun makeUser(){
-
-        user.text = opinion.author
-        user.translationZ = 6f
-
-        user.layoutParams = ConstraintLayout.LayoutParams(
+        author.layoutParams = ConstraintLayout.LayoutParams(
             context.resources.getDimension(R.dimen.author_width).toInt(),
             ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        user.setTextColor(Color.BLACK)
-        user.textSize = 16f
+        author.setTextColor(Color.BLACK)
+        author.textSize = 16f
     }
 
     fun makeText(){
 
+        val margin = context.resources.getDimension(R.dimen.fab_margin).toInt()
         text.text = opinion.opinion
-        text.translationZ = 6f
+        text.translationZ = 5f
+        text.background = context.resources.getDrawable(R.drawable.input, null)
+        text.setPadding(margin/2, (margin * 1.5).toInt(), margin/2, margin/4)
 
         text.layoutParams = ConstraintLayout.LayoutParams(
-            (312*dpFactor).toInt(),
+            context.resources.getDimension(R.dimen.bg_width).toInt(),
             ViewGroup.LayoutParams.WRAP_CONTENT)
 
         text.setTextColor(context.resources.getColor(R.color.darkRed))
@@ -200,51 +183,47 @@ class OpinionElement(id : Int, context: Context, grade: Grade) {
 
         likes.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
-        likes.setTextColor(context.resources.getColor(R.color.buttonRed))
+        //likes.setTextColor(context.resources.getColor(R.color.basicGrey)) -> in setLikeColors()
         likes.textSize = 16f//context.resources.getDimension(R.dimen.font14)
         likes.setTextAppearance(context, R.style.fontFamily)
     }
 
     fun makeUpButton(){
 
-        upButton.setImageResource(R.drawable.ic_1up)
-
+        upButton.setBackgroundColor(Color.argb(0,0,0,0))
         upButton.translationZ = 6f
+
+        setLikeColors(opinion.isLiked(user))
 
         upButton.layoutParams = ConstraintLayout.LayoutParams(
             (25*dpFactor).toInt(),
             (21*dpFactor).toInt())
-        upButton.setBackgroundColor(Color.argb(0,0,0,0))
 
-        //TODO zmienić na likeTap() -> potrzebny index (Login.kt->TODO)
         upButton.setOnClickListener{
-            opinion.tempLikes++
-            likes.text = opinion.tempLikes.toString()
-            }
 
-        upButton.scrollBarStyle
+            setLikeColors(opinion.likeTap(user))
+            likes.text = opinion.likes.toString()
+        }
     }
 
-    fun calcHeight(): Int{
+    fun setLikeColors(function: Boolean){
 
-        user.measure(0,0)
-        text.measure(0,0)
-        var uLines = (user.measuredWidth / dpFactor).toInt() / 226
-        if((user.measuredWidth / dpFactor).toInt().rem(226) > -1)
-            uLines ++
-        var tLines = (user.measuredWidth / dpFactor).toInt() / 312
-        if((text.measuredWidth / dpFactor).toInt().rem(312) > -1)
-            tLines ++
+        if(function){
 
+            upButton.setImageResource(R.drawable.ic_1up_red)
+            likes.setTextColor(context.resources.getColor(R.color.buttonRed))
+        }
+        else{
 
-        return user.measuredHeight * uLines + text.measuredHeight * tLines + (16 * dpFactor).toInt()
+            upButton.setImageResource(R.drawable.ic_1up_grey)
+            likes.setTextColor(context.resources.getColor(R.color.redishGrey))
+        }
     }
 
     fun create(layout: ConstraintLayout){
 
         setData()
-        layout.addView(bg)
-        layout.addView(user)
+        layout.addView(author)
         layout.addView(text)
         layout.addView(likes)
         layout.addView(upButton)
