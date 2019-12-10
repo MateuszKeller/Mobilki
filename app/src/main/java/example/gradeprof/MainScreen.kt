@@ -23,6 +23,7 @@ class MainScreen : AppCompatActivity() {
     var bList = ArrayList<ProfElement>()
     lateinit var user: String
     var dim = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)

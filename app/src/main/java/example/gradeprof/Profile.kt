@@ -20,6 +20,7 @@ class Profile : AppCompatActivity() {
     lateinit var gList: ArrayList<Grade>
     var oList = ArrayList<OpinionElement>()
     lateinit var user: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -183,7 +184,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
 
         likes.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
-        //likes.setTextColor(context.resources.getColor(R.color.basicGrey)) -> in setLikeColors()
+        //likes.setTextColor(context.resources.getColor(R.color.basicGrey)) -> in setLikesColors()
         likes.textSize = 16f//context.resources.getDimension(R.dimen.font14)
         likes.setTextAppearance(context, R.style.fontFamily)
     }
@@ -193,7 +194,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         upButton.setBackgroundColor(Color.argb(0,0,0,0))
         upButton.translationZ = 6f
 
-        setLikeColors(opinion.isLiked(user))
+        setLikesColors(opinion.isLiked(user))
 
         upButton.layoutParams = ConstraintLayout.LayoutParams(
             (25*dpFactor).toInt(),
@@ -201,12 +202,12 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
 
         upButton.setOnClickListener{
 
-            setLikeColors(opinion.likeTap(user))
+            setLikesColors(opinion.likeTap(user))
             likes.text = opinion.likes.toString()
         }
     }
 
-    fun setLikeColors(function: Boolean){
+    fun setLikesColors(function: Boolean){
 
         if(function){
 
@@ -214,7 +215,6 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
             likes.setTextColor(context.resources.getColor(R.color.buttonRed))
         }
         else{
-
             upButton.setImageResource(R.drawable.ic_1up_grey)
             likes.setTextColor(context.resources.getColor(R.color.redishGrey))
         }

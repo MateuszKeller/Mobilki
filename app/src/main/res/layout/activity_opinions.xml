@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/linearLayout3"
+        android:id="@+id/opinionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/basicRed">
 
-        <TextView
-            android:id="@+id/information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Moje opinie:"
-            android:textColor="@color/basicGrey"
-            android:textSize="32sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Moje opinie:"
+        android:textColor="@color/basicGrey"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/closeButton"
@@ -35,46 +35,306 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/close" />
 
-    <Button
-        android:id="@+id/opinion"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="328dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/input"
-        android:radius="11dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/information" />
+        app:layout_constraintTop_toBottomOf="@+id/information">
 
-    <TextView
-        android:id="@+id/testProfName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/testProfName"
-        android:textColor="#332524"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/opinion"
-        app:layout_constraintTop_toBottomOf="@+id/testProfDate" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/innerScrollLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/testProfDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/testProfDate"
-        android:textColor="#332524"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/opinion"
-        app:layout_constraintTop_toTopOf="@+id/opinion" />
+            <TextView
+                android:id="@+id/testText"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/testDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText"
+                app:layout_constraintTop_toTopOf="@+id/testText" />
+
+            <TextView
+                android:id="@+id/testText1"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText" />
+
+            <TextView
+                android:id="@+id/testDate1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText1"
+                app:layout_constraintTop_toTopOf="@+id/testText1" />
+
+            <TextView
+                android:id="@+id/testText2"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText1" />
+
+            <TextView
+                android:id="@+id/testDate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText2"
+                app:layout_constraintTop_toTopOf="@+id/testText2" />
+
+            <TextView
+                android:id="@+id/testText3"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText2" />
+
+            <TextView
+                android:id="@+id/testDate3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText3"
+                app:layout_constraintTop_toTopOf="@+id/testText3" />
+
+            <TextView
+                android:id="@+id/testText5"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText4" />
+
+            <TextView
+                android:id="@+id/testDate5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText5"
+                app:layout_constraintTop_toTopOf="@+id/testText5" />
+
+            <TextView
+                android:id="@+id/testText6"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText5" />
+
+            <TextView
+                android:id="@+id/testDate6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText6"
+                app:layout_constraintTop_toTopOf="@+id/testText6" />
+
+            <TextView
+                android:id="@+id/testText7"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText6" />
+
+            <TextView
+                android:id="@+id/testDate7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText7"
+                app:layout_constraintTop_toTopOf="@+id/testText7" />
+
+            <TextView
+                android:id="@+id/testText8"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText7" />
+
+            <TextView
+                android:id="@+id/testDate8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText8"
+                app:layout_constraintTop_toTopOf="@+id/testText8" />
+
+            <TextView
+                android:id="@+id/testText4"
+                android:layout_width="@dimen/bg_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="32sp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/testProfName"
+                android:textColor="@color/dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testText3" />
+
+            <TextView
+                android:id="@+id/testDate4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/testProfDate"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/testText4"
+                app:layout_constraintTop_toTopOf="@+id/testText4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <!--TODO lista opinii -->
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
