@@ -3,6 +3,7 @@ package example.gradeprof;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
 public class Professor implements Comparable<Professor>, Serializable {
@@ -10,7 +11,7 @@ public class Professor implements Comparable<Professor>, Serializable {
     private String name;
     private String department;
     private String info;
-    private ArrayList<Grade> grades;
+    private List<Grade> grades;
 
 
 
@@ -67,8 +68,8 @@ public class Professor implements Comparable<Professor>, Serializable {
     public void setName(String name) { this.name = name; }
     public String getDepartment() { return department; }
     public void setDepartment(String department) { this.department = department; }
-    public ArrayList<Grade> getGrades() { return grades; }
-    public void setGrades(ArrayList<Grade> grades) { this.grades = grades; }
+    public List<Grade> getGrades() { return grades; }
+    public void setGrades(List<Grade> grades) { this.grades = grades; }
     public void addGrade( Grade grade) { grades.add(grade); }
     public void removeGrade(Grade grade){
                 grades.remove(grade);

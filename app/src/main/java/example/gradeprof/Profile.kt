@@ -17,7 +17,7 @@ import java.lang.StringBuilder
 class Profile : AppCompatActivity() {
 
     lateinit var professor: Professor
-    lateinit var gList: ArrayList<Grade>
+    lateinit var gList: List<Grade>
     var oList = ArrayList<OpinionElement>()
     lateinit var user: String
 
