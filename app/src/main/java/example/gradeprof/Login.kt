@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val m = Manager.getInstance()
+
 
         //TODO rzucać index
         logInButton.setOnClickListener {
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
             val login = email.text.toString()
             val passw = password.text.toString()
-            val m = Manager()
+
 
             if(m.logIn(login, passw)){
 

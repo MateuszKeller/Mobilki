@@ -11,7 +11,6 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.android.synthetic.main.activity_main_screen.*
 import java.lang.StringBuilder
 
@@ -19,102 +18,31 @@ import java.lang.StringBuilder
 
 class MainScreen : AppCompatActivity() {
 
-    var pList = ArrayList<Professor>()
-    var bList = ArrayList<ProfElement>()
+    var professorList = mutableListOf<Professor>()
+    var buttonList = ArrayList<ProfElement>()
     lateinit var user: String
     var dim = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
-
-        val i = intent
-        user = i.getStringExtra("index") as String
+        user = intent.getStringExtra("index") as String
         Toast.makeText(applicationContext, "Witaj: " + user, Toast.LENGTH_LONG ).show()
-
-        testFill()
-        generatingButtons()
-
-
+        Manager.getInstance().addDataStatusListener("MainScreenListener",
+            DataStatus { it: List<Professor> -> refreshButtons(it)})
     }
 
-    fun testFill(){
-
-        val opinions = ArrayList<Grade>()
-        opinions.add(Grade(
-            4.5f,
-            3.1f,
-            2.2f,
-            resources.getString(R.string.OT1),resources.getString(R.string.ON1))
-        )
-        opinions.add(Grade(
-            4.5f,
-            3.1f,
-            2.2f,
-            resources.getString(R.string.OT2),resources.getString(R.string.ON2))
-        )
-        opinions.add(Grade(
-            4.5f,
-            3.1f,
-            2.2f,
-            resources.getString(R.string.OT1),resources.getString(R.string.ON1))
-        )
-        opinions.add(Grade(
-            4.5f,
-            3.1f,
-            2.2f,
-            resources.getString(R.string.OT2),resources.getString(R.string.ON2))
-        )
-
-        val m = Manager();
-        m.getProfs()
-
-        pList.add(Professor(
-            resources.getString(R.string.testProfName),
-            "FTIMS",
-            resources.getString(R.string.testProfInfo),
-            opinions,
-            "prof1")
-        )
-        pList.add(Professor(
-            resources.getString(R.string.tPN1),
-            "FTIMS",
-            resources.getString(R.string.TPI1),
-            opinions,
-            "prof2")
-        )
-        pList.add(Professor(
-            resources.getString(R.string.tPN2),
-            "FTIMS",
-            resources.getString(R.string.TPI2),
-            opinions,
-            "prof3")
-        )
-        pList.add(Professor(
-            resources.getString(R.string.testProfName),
-            "FTIMS",
-            resources.getString(R.string.testProfInfo),
-            opinions,
-            "prof4")
-        )
-        pList.add(Professor(
-            resources.getString(R.string.tPN1),
-            "FTIMS",
-            resources.getString(R.string.TPI1),
-            opinions,
-            "prof5")
-        )
-    }
-
-    private fun generatingButtons(){
-
+    private fun refreshButtons(professorList : List<Professor>){
+        print("Refresh buttons")
+        buttonList.clear()
         var id = 0
-        for( p in pList){
+        for (p in professorList) {
             id += 10
-            bList.add(ProfElement(id, this@MainScreen, p, user))
+            buttonList.add(ProfElement(id, this@MainScreen, p, user))
         }
-        for (b in bList)
+        for (b in buttonList) {
             b.create(findViewById(R.id.innerScrollLayout))
+        }
     }
 
     fun showPopupMenu(view: View) {

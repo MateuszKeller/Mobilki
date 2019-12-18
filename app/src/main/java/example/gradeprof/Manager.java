@@ -11,49 +11,59 @@ import com.google.firebase.database.ValueEventListener;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Manager {
 
-    private static Manager manager = null;
     private String indexNumber;
-    private List<Professor> professorList;
+    private static Manager manager = new Manager();
+    private List<Professor> professorList = new ArrayList<>();
     private FirebaseDatabase base = FirebaseDatabase.getInstance();
+    private Map<String, DataStatus> listenersMap = new HashMap<>();
+
+
+    public void addDataStatusListener(String name, DataStatus status){
+        listenersMap.put(name, status);
+        status.dataChanged(professorList);
+    }
+
+
+    public static Manager getInstance(){
+        return manager;
+    }
 
 
     public List<Professor> getProfessorList(){
         return professorList;
     }
-    public Manager(){
+    private Manager(){
+        System.out.println("Manager.Manager");
         indexNumber = "";
-        professorList = new ArrayList<>();
+        addListener();
         //read from database/xml here
     }
 
 
-    public void getProfs(){
-        System.out.println("in get Profs");
-        professorList = new ArrayList<>();
+    public List<Professor> getProfs(){
+        System.out.println("profsList size from getProfs(): " + professorList.size());
+        return professorList;
+    }
+
+    private void addListener(){
         DatabaseReference ref = base.getReference();
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                int i = 0;
-//                int j = 0;
-
+                List<Professor> listenersProfList = new ArrayList<>();
                 for(DataSnapshot childProfList : dataSnapshot.getChildren()) {
-//                    i++;
-//                    System.out.println( "iteracja " + i + ": "+ childProfList.getValue().toString());
                     for(DataSnapshot childProf : childProfList.getChildren()) {
 
-//                        System.out.println("wewn. iteracja " + j + ": " + childProf.getValue().toString());
                         String name = childProf.child("name").getValue().toString();
                         String id = childProf.getKey().toString();
                         String department = childProf.child("department").getValue().toString();
                         String info = childProf.child("info").getValue().toString();
-//                        System.out.println("i: " + i + " name: " + name + " id: " + id + "dept: " + department + "info: " + info);
-//                        j++;
-                        ///////////////
                         Professor profTemp = new Professor(id, name, department, info);
                         List<Grade> gradesTempList = new ArrayList<>();
                         DataSnapshot childGradesList = childProf.child("grades");
@@ -70,40 +80,36 @@ public class Manager {
                                         " passRate: " + passRate + " availability: " + availability +
                                         " merits: " + merits +
                                         " opinion: " + opinion);
-                                tempGrade = new Grade(new Float(passRate), new Float(availability), new Float(merits), author);
+                                tempGrade = new Grade(Float.valueOf(passRate), Float.valueOf(availability), Float.valueOf(merits), author);
                                 List<String> likesTempList = new ArrayList<>();
                                 DataSnapshot childLikesList = childGrade.child("likes");
-                                if(childLikesList !=  null) {
-                                    for (DataSnapshot childLike : childLikesList.getChildren()) {
-                                        String likeTemp = childLike.getKey().toString();
-                                        likesTempList.add(likeTemp);
-                                    }
-                                    tempGrade.setWhoLiked(likesTempList);
+                                for (DataSnapshot childLike : childLikesList.getChildren()) {
+                                    String likeTemp = childLike.getKey().toString();
+                                    likesTempList.add(likeTemp);
                                 }
+                                tempGrade.setWhoLiked(likesTempList);
                                 gradesTempList.add(tempGrade);
                             }
                         }
                         profTemp.setGrades(gradesTempList);
-                        isNull(profTemp, "profTemp");
-                        professorList.add(profTemp);
-                        System.out.println("rozmiar professorList: " + professorList.size());
+//                        isNull(profTemp, "profTemp");
+                        listenersProfList.add(profTemp);
+//                        System.out.println("rozmiar professorList: " + listenersProfList.size());
                     }
 
+                }
+                professorList = listenersProfList;
+                for(DataStatus listener : listenersMap.values()){
+                    listener.dataChanged(professorList);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                System.out.println("databaseError.getMessage() = " + databaseError.getMessage());
             }
         };
         ref.addValueEventListener(listener);
-        System.out.println("ilosc profow: " + professorList.size());
-
-
-        System.out.println("rozmiar professorList 2: " + professorList.size());
-
-
     }
 
     public void isNull(Object o, String name){
