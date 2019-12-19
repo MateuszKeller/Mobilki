@@ -20,14 +20,15 @@ class MainScreen : AppCompatActivity() {
 
     var professorList = mutableListOf<Professor>()
     var buttonList = ArrayList<ProfElement>()
-    lateinit var user: String
+//    lateinit var user: String
     var dim = false
+    var user = Manager.getInstance().user
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
-        user = intent.getStringExtra("index") as String
-        Toast.makeText(applicationContext, "Witaj: " + user, Toast.LENGTH_LONG ).show()
+//        user = intent.getStringExtra("index") as String
+        Toast.makeText(applicationContext, "Witaj: " + Manager.getInstance().getUser(), Toast.LENGTH_LONG ).show()
         Manager.getInstance().addDataStatusListener("MainScreenListener",
             DataStatus { it: List<Professor> -> refreshButtons(it)})
     }

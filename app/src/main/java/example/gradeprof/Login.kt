@@ -4,14 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 
 
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
     /// TODO usunać
     // for faster testing Toast msg still appearing
-    val logOFF = false
+//    val logOFF = false
+    val firebaseAuth = FirebaseAuth.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,28 +25,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val m = Manager.getInstance()
 
-
         //TODO rzucać index
         logInButton.setOnClickListener {
-            if (logOFF){
-                val intent = Intent(this, MainScreen::class.java)
-                intent.putExtra("index", "admin")
-                startActivity(intent)
+
+            var login = email.text.toString().trim()
+            val passw = password.text.toString().trim()
+            var regex = Regex ("([0-9]){6}")
+            if(regex.matches(login)){
+                login  = login + "@edu.p.lodz.pl"
             }
-
-            val login = email.text.toString()
-            val passw = password.text.toString()
+            m.registerUser(login)
 
 
-            if(m.logIn(login, passw)){
+            firebaseAuth.signInWithEmailAndPassword(login, passw).addOnCompleteListener(
+                OnCompleteListener { println("onComplete function started")
+                    if (it.isSuccessful) {
+                        val intent = Intent(this, MainScreen::class.java)
+                        startActivity(intent)
 
-                val intent = Intent(this, MainScreen::class.java)
-                intent.putExtra("index", login)
-                startActivity(intent)
-            }
-            else
-                Toast.makeText(applicationContext, "Nieprawidłowe dane logowania!", Toast.LENGTH_SHORT ).show()
+                    } else {
+                        Toast.makeText(applicationContext, "Nieprawidłowe dane logowania!", Toast.LENGTH_SHORT)
+                            .show()
+                    } })
         }
+
+
+
 
 //        var isVisible = false
 //        visibilityButton.setOnClickListener {

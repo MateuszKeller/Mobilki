@@ -22,6 +22,7 @@ public class Manager {
     private List<Professor> professorList = new ArrayList<>();
     private FirebaseDatabase base = FirebaseDatabase.getInstance();
     private Map<String, DataStatus> listenersMap = new HashMap<>();
+    private String user = "";
 
 
     public void addDataStatusListener(String name, DataStatus status){
@@ -29,6 +30,12 @@ public class Manager {
         status.dataChanged(professorList);
     }
 
+    public void registerUser(String login){
+        this.user = login;
+    }
+    public String getUser(){
+        return user;
+    }
 
     public static Manager getInstance(){
         return manager;
