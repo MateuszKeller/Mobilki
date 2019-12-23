@@ -198,9 +198,6 @@ public class Manager {
         }
     }
 
-
-
-
     public List<Grade> getMyGrades(){
         List<Grade> myGrades = new ArrayList<Grade>();
         for(Professor prof: professorList){
@@ -213,6 +210,15 @@ public class Manager {
 
         }
         return myGrades;
+    }
+
+    public Professor getExactProfessor(String id){
+
+            for(Professor ret: professorList)
+                if(ret.getID().equals(id))
+                    return ret;
+
+            return null;
     }
 
 

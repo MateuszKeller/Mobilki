@@ -84,8 +84,8 @@ public class Professor implements Comparable<Professor>, Serializable {
 
     @Override
     public int compareTo(Professor other) {
-        Integer thisProf = this.getGrades().size();
-        Integer otherProf = other.getGrades().size();
+        String thisProf = this.ID;
+        String otherProf = other.getID();
         return thisProf.compareTo(otherProf);
     }
 

@@ -18,32 +18,51 @@ import java.lang.StringBuilder
 
 class MainScreen : AppCompatActivity() {
 
-    var professorList = mutableListOf<Professor>()
-    var buttonList = ArrayList<ProfElement>()
-//    lateinit var user: String
+    var professorElements = ArrayList<ProfElement>()
     var dim = false
-    var user = Manager.getInstance().user
+    val m = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
-//        user = intent.getStringExtra("index") as String
-        Toast.makeText(applicationContext, "Witaj: " + Manager.getInstance().getUser(), Toast.LENGTH_LONG ).show()
-        Manager.getInstance().addDataStatusListener("MainScreenListener",
-            DataStatus { it: List<Professor> -> refreshButtons(it)})
+
+        Toast.makeText(applicationContext, "Witaj: " + m.user, Toast.LENGTH_LONG ).show()
+
+        m.addDataStatusListener("MainScreenListener") { refreshElements(it)}
     }
 
-    private fun refreshButtons(professorList : List<Professor>){
+    private fun refreshElements(professorList : List<Professor>){
         print("Refresh buttons")
-        buttonList.clear()
+        professorElements.clear()
         var id = 0
         for (p in professorList) {
             id += 10
-            buttonList.add(ProfElement(id, this@MainScreen, p, user))
+            println("PROF: " + id + p.id)
+            professorElements.add(ProfElement(id, this@MainScreen, p))
+
+            if(intent.getBooleanExtra("fromLogin", false))
+            t(p)
         }
-        for (b in buttonList) {
+        for (b in professorElements) {
             b.create(findViewById(R.id.innerScrollLayout))
         }
+    }
+
+    ///TODO DEL - FOR TESTING
+    fun t(p: Professor){
+
+        p.addGrade(Grade(
+            4.5f,
+            3.1f,
+            2.2f,
+            resources.getString(R.string.OT1),
+            m.indexNumber))
+        p.addGrade(Grade(
+            4.5f,
+            3.1f,
+            2.2f,
+            resources.getString(R.string.OT2),
+            m.indexNumber))
     }
 
     fun showPopupMenu(view: View) {
@@ -56,7 +75,6 @@ class MainScreen : AppCompatActivity() {
 
         popupMenu.setOnMenuItemClickListener {
             val intent = Intent(this, Opinions::class.java)
-            intent.putExtra("index", user)
             startActivity(intent)
             when(it.itemId) {
                 R.id.item1 -> startActivity(intent)
@@ -66,12 +84,12 @@ class MainScreen : AppCompatActivity() {
     }
 }
 
-class ProfElement(id : Int, context: Context, prof: Professor, user: String) {
+class ProfElement(id : Int, context: Context, prof: Professor) {
 
     val professor= prof
     var id= id
     var context= context
-    val user = user
+
     var bg = Button(context)
     var photo = ImageView(context)
     var pname = TextView(context)
@@ -162,8 +180,7 @@ class ProfElement(id : Int, context: Context, prof: Professor, user: String) {
 
         bg.setOnClickListener{
             val intent = Intent( context, Profile::class.java)
-            intent.putExtra("professor", professor)
-            intent.putExtra("index", user)
+            intent.putExtra("professor", professor.id)
             context.startActivity(intent) }
     }
 

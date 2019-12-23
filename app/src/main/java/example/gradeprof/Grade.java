@@ -13,6 +13,7 @@ public class Grade implements Comparable <Grade>, Serializable {
     private String opinion;
     private List<String> whoLiked;
     private String author;
+    private String userName;
     private final String uid = UUID.randomUUID().toString();
     private int tempLikes = 0;
 
@@ -21,6 +22,7 @@ public class Grade implements Comparable <Grade>, Serializable {
         this.availability = availability;
         this.merits = merits;
         this.author = author;
+        userName = author;
     }
 
     public Grade(float passRate, float availability, float merits, String opinion, String author) {
@@ -30,6 +32,7 @@ public class Grade implements Comparable <Grade>, Serializable {
         this.opinion = opinion;
         this.whoLiked = new ArrayList<>();
         this.author = author;
+        userName = author;
     }
 
     public String getAuthor(){
@@ -37,6 +40,12 @@ public class Grade implements Comparable <Grade>, Serializable {
     }
     public void setAuthor(String author) {
         this.author = author;
+    }
+    public String getUserName(){
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUID(){
@@ -75,5 +84,18 @@ public class Grade implements Comparable <Grade>, Serializable {
         Integer thisGrade = this.getLikes();
         Integer otherGrade = other.getLikes();
         return thisGrade.compareTo(otherGrade);
+    }
+
+    public String toString(){
+        StringBuilder ret = new StringBuilder();
+
+        ret.append("Zdaw: ").append(passRate)
+                .append("; Dost: ").append(availability)
+                .append("; Meryt: ").append(merits)
+                .append("; Opinia: ").append(opinion)
+                .append("; Autor: ").append(author)
+                .append("; User: ").append(userName);
+
+        return ret.toString();
     }
 }

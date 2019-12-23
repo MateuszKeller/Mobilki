@@ -17,32 +17,28 @@ import java.lang.StringBuilder
 class Profile : AppCompatActivity() {
 
     lateinit var professor: Professor
-    lateinit var gList: List<Grade>
-    var oList = ArrayList<OpinionElement>()
-    lateinit var user: String
+    lateinit var gradesList: List<Grade>
+    var opinionElements = ArrayList<OpinionElement>()
+    val m = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        val i = intent
-        professor = i.getSerializableExtra("professor") as Professor
-        user = i.getStringExtra("index") as String
-        gList = professor.grades
+        professor =  m.getExactProfessor(intent.getStringExtra("professor"))
+        gradesList = professor.grades
 
         setData()
         generatingOpinions()
 
         closeButton.setOnClickListener {
             val intent = Intent(this, MainScreen::class.java)
-            intent.putExtra("index", user)
             startActivity(intent)
         }
 
         gradeButton.setOnClickListener {
             val intent = Intent(this, GradeForm::class.java)
-            intent.putExtra("professor", professor)
-            intent.putExtra("index", user)
+            intent.putExtra("professor", professor.id)
             startActivity(intent)
         }
     }
@@ -60,11 +56,13 @@ class Profile : AppCompatActivity() {
     private fun generatingOpinions() {
 
         var id = 0
-        for (g in gList) {
+        for (g in gradesList) {
+            if(g.opinion == "" || g.opinion == null) continue
+
             id += 10
-            oList.add(OpinionElement(id, this@Profile, g, user))
+            opinionElements.add(OpinionElement(id, this@Profile, g, m.indexNumber))
         }
-        for (o in oList)
+        for (o in opinionElements)
             o.create(findViewById(R.id.innerScrollLayout))
     }
 }
@@ -145,7 +143,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
 
     fun makeAuthor(){
 
-        author.text = opinion.author
+        author.text = opinion.userName
         author.translationZ = 6f
 
         author.layoutParams = ConstraintLayout.LayoutParams(

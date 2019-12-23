@@ -14,9 +14,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
+
     /// TODO usunać
-    // for faster testing Toast msg still appearing
-//    val logOFF = false
+    val logOFF = true
     val firebaseAuth = FirebaseAuth.getInstance()
 
 
@@ -25,44 +25,33 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val m = Manager.getInstance()
 
-        //TODO rzucać index
         logInButton.setOnClickListener {
 
             var login = email.text.toString().trim()
-            val passw = password.text.toString().trim()
+            var passw = password.text.toString().trim()
             var regex = Regex ("([0-9]){6}")
+
+            if(logOFF){ login = "217107"; passw = "haslo1" }
+
             if(regex.matches(login)){
+
+                m.indexNumber = login
                 login  = login + "@edu.p.lodz.pl"
             }
+
             m.registerUser(login)
 
+            firebaseAuth.signInWithEmailAndPassword(login, passw).addOnCompleteListener {
+                println("onComplete function started")
+                if (it.isSuccessful) {
+                    val intent = Intent(this, MainScreen::class.java)
+                    intent.putExtra("fromLogin", true) // TODO DEL - FOR TESTING
+                    startActivity(intent)
 
-            firebaseAuth.signInWithEmailAndPassword(login, passw).addOnCompleteListener(
-                OnCompleteListener { println("onComplete function started")
-                    if (it.isSuccessful) {
-                        val intent = Intent(this, MainScreen::class.java)
-                        startActivity(intent)
-
-                    } else {
-                        Toast.makeText(applicationContext, "Nieprawidłowe dane logowania!", Toast.LENGTH_SHORT)
-                            .show()
-                    } })
+                }
+                else
+                    Toast.makeText(applicationContext, "Nieprawidłowe dane logowania!", Toast.LENGTH_SHORT).show()
+            }
         }
-
-
-
-
-//        var isVisible = false
-//        visibilityButton.setOnClickListener {
-//            if (!isVisible)
-//            {
-//                visibilityButton.alpha = 1.0f
-//                isVisible = true
-//            } else
-//            {
-//                visibilityButton.alpha = 0.5f
-//                isVisible = false
-//            }
-//        }
     }
 }
