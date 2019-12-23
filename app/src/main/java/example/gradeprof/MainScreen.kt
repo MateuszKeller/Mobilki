@@ -26,6 +26,7 @@ class MainScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
+        if(intent.getBooleanExtra("fromLogin", false))
         Toast.makeText(applicationContext, "Witaj: " + m.user, Toast.LENGTH_LONG ).show()
 
         m.addDataStatusListener("MainScreenListener") { refreshElements(it)}
@@ -56,7 +57,7 @@ class MainScreen : AppCompatActivity() {
             3.1f,
             2.2f,
             resources.getString(R.string.OT1),
-            m.indexNumber))
+            "216724"))
         p.addGrade(Grade(
             4.5f,
             3.1f,

@@ -9,7 +9,7 @@
     android:background="@color/basicRed">
 
     <TextView
-        android:id="@+id/profName2"
+        android:id="@+id/profName"
         android:layout_width="wrap_content"
         android:layout_height="66dp"
         android:layout_marginStart="10dp"
@@ -43,7 +43,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/temp_photo" />
 
 
     <Button
@@ -82,7 +82,7 @@
 
     <TextView
         android:id="@+id/information"
-        android:layout_width="259dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -122,10 +122,8 @@
         android:layout_height="26sp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:isIndicator="true"
         android:numStars="5"
         android:progressDrawable="@drawable/book_ratingbar"
-        android:rating="@string/testProfZ"
         android:stepSize="0.5"
         app:layout_constraintStart_toEndOf="@+id/textZ"
         app:layout_constraintTop_toBottomOf="@+id/information" />
@@ -164,9 +162,7 @@
         android:numStars="5"
         android:progressDrawable="@drawable/book_ratingbar"
         app:layout_constraintStart_toEndOf="@+id/textD"
-        app:layout_constraintTop_toBottomOf="@+id/ratingZ"
-        android:rating="@string/testProfD"
-        android:isIndicator="true" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingZ" />
 
     <ImageView
         android:id="@+id/infoM"
@@ -202,12 +198,10 @@
         android:numStars="5"
         android:progressDrawable="@drawable/book_ratingbar"
         app:layout_constraintStart_toEndOf="@+id/textM"
-        app:layout_constraintTop_toBottomOf="@+id/ratingD"
-        android:rating="@string/testProfM"
-        android:isIndicator="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/ratingD" />
 
     <TextView
-        android:id="@+id/opinions"
+        android:id="@+id/opinion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -218,6 +212,24 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textM" />
+
+    <EditText
+        android:id="@+id/opinionText"
+        android:layout_width="@dimen/bg_width"
+        android:layout_height="158dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/input"
+        android:fontFamily="sans-serif"
+        android:foregroundGravity="bottom"
+        android:gravity="top"
+        android:hint="Napisz opinię.."
+        android:padding="4dp"
+        android:textColor="@color/darkRed"
+        android:textColorHint="@color/greyishRed"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opinion" />
 
     <!--TODO wyświetlanie przypisanej opinii -->
     <!--TODO edycje konkretnej opinni -->

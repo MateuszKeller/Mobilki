@@ -17,37 +17,31 @@ import java.lang.StringBuilder
 
 class Opinions : AppCompatActivity(){
 
-    lateinit var grades: ArrayList<Grade>
+    lateinit var gradesList: List<Grade>
     var gList = ArrayList<GradeElement>()
-    lateinit var user: String
+    val m = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opinions)
 
-        val i = intent
-        user = i.getStringExtra("index") as String
+        gradesList = m.myGrades
+        println("GRADESLIST: " + gradesList.size)
+
+        generatingGrades()
 
         closeButton.setOnClickListener {
             val intent = Intent(this, MainScreen::class.java)
-            intent.putExtra("index", user)
             startActivity(intent)
         }
-
-        testText.setOnClickListener{
-            val intent = Intent(this, Edit::class.java)
-            intent.putExtra("index", user)
-            startActivity(intent)
-        }
-
     }
 
     private fun generatingGrades() {
 
         var id = 0
-        for (g in grades) {
+        for (g in gradesList) {
             id += 10
-            gList.add(GradeElement(id, this@Opinions, g, user))
+            gList.add(GradeElement(id, this@Opinions, g))
         }
         for (o in gList)
             o.create(findViewById(R.id.innerScrollLayout))
@@ -55,12 +49,11 @@ class Opinions : AppCompatActivity(){
 }
 
 ///-------------------------------------------------------------------------------------------------
-class GradeElement(id : Int, context: Context, grade: Grade, user: String) {
+class GradeElement(id : Int, context: Context, grade: Grade) {
 
     var opinion= grade
     var id= id
     var context= context
-    val user = user
     var who = TextView(context)
     var date = TextView(context)
 
@@ -100,7 +93,7 @@ class GradeElement(id : Int, context: Context, grade: Grade, user: String) {
         var marginSide = ConstraintSet.TOP
         if(id != 10){
             upperOpinionID = id - 9
-            margin = (4 * dpFactor).toInt()
+            margin = (8 * dpFactor).toInt()
             marginSide = ConstraintSet.BOTTOM
         }
 
@@ -121,27 +114,31 @@ class GradeElement(id : Int, context: Context, grade: Grade, user: String) {
         date.translationZ = 6f
 
         date.layoutParams = ConstraintLayout.LayoutParams(
-            context.resources.getDimension(R.dimen.author_width).toInt(),
+            ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        date.setTextColor(Color.BLACK)
-        date.textSize = 16f
+        date.setTextColor(context.resources.getColor(R.color.dark))
+        date.textSize = 20f
     }
 
     fun makeWho(){
 
-        val margin = context.resources.getDimension(R.dimen.fab_margin).toInt()
+        val padding = context.resources.getDimension(R.dimen.fab_margin).toInt()
         who.text = opinion.opinion
         who.translationZ = 5f
         who.background = context.resources.getDrawable(R.drawable.input, null)
-        who.setPadding(margin/2, (margin * 1.5).toInt(), margin/2, margin/4)
+        who.setPadding(padding/2, (padding * 1.5).toInt(), padding/2, padding/4)
 
         who.layoutParams = ConstraintLayout.LayoutParams(
             context.resources.getDimension(R.dimen.bg_width).toInt(),
             ViewGroup.LayoutParams.WRAP_CONTENT)
 
         who.setTextColor(context.resources.getColor(R.color.darkRed))
-        who.textSize = 14f//context.resources.getDimension(R.dimen.font14)
+        who.textSize = 24f//context.resources.getDimension(R.dimen.font14)
+        who.setOnClickListener{
+            val intent = Intent(context, Edit::class.java)
+            intent.putExtra("uuid", opinion.uid)
+            context.startActivity(intent) }
         //text.setTextAppearance(context, R.style.fontFamily)
     }
 

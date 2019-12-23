@@ -1,6 +1,9 @@
 package example.gradeprof;
 
+import android.icu.util.LocaleData;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,13 +19,15 @@ public class Grade implements Comparable <Grade>, Serializable {
     private String userName;
     private final String uid = UUID.randomUUID().toString();
     private int tempLikes = 0;
+    private LocalDateTime date;
 
     public Grade(float passRate, float availability, float merits, String author) {
         this.passRate = passRate;
         this.availability = availability;
         this.merits = merits;
         this.author = author;
-        userName = author;
+        this.userName = author;
+        this.date = LocalDateTime.now();
     }
 
     public Grade(float passRate, float availability, float merits, String opinion, String author) {
@@ -32,7 +37,8 @@ public class Grade implements Comparable <Grade>, Serializable {
         this.opinion = opinion;
         this.whoLiked = new ArrayList<>();
         this.author = author;
-        userName = author;
+        this.userName = author;
+        this.date = LocalDateTime.now();
     }
 
     public String getAuthor(){
@@ -63,6 +69,10 @@ public class Grade implements Comparable <Grade>, Serializable {
     public void setWhoLiked(List<String> whoLiked){
         this.whoLiked = whoLiked;
     }
+    public LocalDateTime getDate(){return date;}
+    public void setDate(LocalDateTime date) { this.date = date;}
+
+
     public boolean likeTap(String indexNumber){
         if (isLiked(indexNumber)) {
             whoLiked.remove(indexNumber);
@@ -81,21 +91,17 @@ public class Grade implements Comparable <Grade>, Serializable {
 
     @Override
     public int compareTo(Grade other) {
-        Integer thisGrade = this.getLikes();
-        Integer otherGrade = other.getLikes();
-        return thisGrade.compareTo(otherGrade);
+        return this.uid.compareTo(other.uid);
     }
 
     public String toString(){
-        StringBuilder ret = new StringBuilder();
 
-        ret.append("Zdaw: ").append(passRate)
-                .append("; Dost: ").append(availability)
-                .append("; Meryt: ").append(merits)
-                .append("; Opinia: ").append(opinion)
-                .append("; Autor: ").append(author)
-                .append("; User: ").append(userName);
-
-        return ret.toString();
+        String ret = "Zdaw: " + passRate +
+                "; Dost: " + availability +
+                "; Meryt: " + merits +
+                "; Opinia: " + opinion +
+                "; Autor: " + author +
+                "; User: " + userName;
+        return ret;
     }
 }

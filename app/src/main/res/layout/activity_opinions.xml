@@ -52,6 +52,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--
+
             <TextView
                 android:id="@+id/testText"
                 android:layout_width="@dimen/bg_width"
@@ -329,6 +331,7 @@
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/testText4"
                 app:layout_constraintTop_toTopOf="@+id/testText4" />
+                -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

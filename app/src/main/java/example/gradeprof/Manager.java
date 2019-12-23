@@ -152,7 +152,6 @@ public class Manager {
     //function to log in, will compare given name and passwd with database
     public boolean logIn(String indexNum, String password){
 
-
         BigInteger givenPassword = new BigInteger(Utils.hash(password));
         String name = "admin";
 
@@ -209,6 +208,7 @@ public class Manager {
             }
 
         }
+        System.out.println("MYGRADES: " + myGrades.size());
         return myGrades;
     }
 
@@ -219,6 +219,26 @@ public class Manager {
                     return ret;
 
             return null;
+    }
+
+    public Professor getExactProfessor(Grade grade){
+
+        for(Professor ret: professorList)
+            for(Grade g: ret.getGrades())
+                if(g.equals(grade))
+                return ret;
+
+        return null;
+    }
+
+    public Grade getExactGrade(String uuid){
+
+        for(Professor p: professorList)
+            for(Grade ret: p.getGrades())
+                if(ret.getUID().equals(uuid))
+                return ret;
+
+        return null;
     }
 
 

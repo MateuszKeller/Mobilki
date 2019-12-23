@@ -48,7 +48,7 @@ public class Professor implements Comparable<Professor>, Serializable {
         if(grades != null)
             this.grades = grades;
         else
-        this.grades = new ArrayList<Grade>();
+        this.grades = new ArrayList<>();
 
         this.ID = ID;
         this.info = info;
@@ -56,7 +56,7 @@ public class Professor implements Comparable<Professor>, Serializable {
     public Professor(String ID, String name, String department, String info) {
         this.name = name;
         this.department = department;
-        this.grades = new ArrayList<Grade>();
+        this.grades = new ArrayList<>();
         this.ID = ID;
         this.info = info;
     }
