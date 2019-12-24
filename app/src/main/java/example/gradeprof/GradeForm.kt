@@ -38,17 +38,16 @@ class GradeForm : AppCompatActivity(){
 
     fun addOpinion(): Grade? {
 
-        var zGrade = findViewById<RatingBarSvg>(R.id.ratingZ).rating
-        var dGrade = findViewById<RatingBarSvg>(R.id.ratingD).rating
-        var mGrade = findViewById<RatingBarSvg>(R.id.ratingM).rating
+        val zGrade = findViewById<RatingBarSvg>(R.id.ratingZ).rating
+        val dGrade = findViewById<RatingBarSvg>(R.id.ratingD).rating
+        val mGrade = findViewById<RatingBarSvg>(R.id.ratingM).rating
+        val text = findViewById<EditText>(R.id.opinionText).text.toString()
 
         if(zGrade < 0.5 || dGrade < 0.5 || mGrade < 0.5){
 
             Toast.makeText(applicationContext, "Ocena nie może być mniejsza niż 0.5!", Toast.LENGTH_SHORT ).show()
             return null
         }
-
-        var text = findViewById<EditText>(R.id.opinionText).text.toString()
 
         if(text!= "")
             return Grade(zGrade, dGrade, mGrade, text, m.indexNumber)

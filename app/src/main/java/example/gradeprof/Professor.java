@@ -13,8 +13,6 @@ public class Professor implements Comparable<Professor>, Serializable {
     private String info;
     private List<Grade> grades;
 
-
-
     public float averagePassRate(){
         float res = 0;
         for (Grade temp: grades){

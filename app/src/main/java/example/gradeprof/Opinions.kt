@@ -14,20 +14,19 @@ import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_opinions.*
 import kotlinx.android.synthetic.main.activity_opinions.closeButton
 import java.lang.StringBuilder
+import java.time.format.DateTimeFormatter
 
 class Opinions : AppCompatActivity(){
 
     lateinit var gradesList: List<Grade>
     var gList = ArrayList<GradeElement>()
-    val m = Manager.getInstance()
+    private val m: Manager = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opinions)
 
         gradesList = m.myGrades
-        println("GRADESLIST: " + gradesList.size)
-
         generatingGrades()
 
         closeButton.setOnClickListener {
@@ -49,16 +48,14 @@ class Opinions : AppCompatActivity(){
 }
 
 ///-------------------------------------------------------------------------------------------------
-class GradeElement(id : Int, context: Context, grade: Grade) {
+class GradeElement(val id: Int, val context: Context, grade: Grade) {
 
     var opinion= grade
-    var id= id
-    var context= context
     var who = TextView(context)
     var date = TextView(context)
 
 
-    val dpFactor= context.resources.displayMetrics.density
+    private val dpFactor= context.resources.displayMetrics.density
     init {
         who.id = id + 1
         date.id = id + 2
@@ -77,13 +74,13 @@ class GradeElement(id : Int, context: Context, grade: Grade) {
         return ret.toString()
     }
 
-    fun setData(){
+    private fun setData(){
 
         makeWho()
         makeDate()
     }
 
-    fun constrain(layout: ConstraintLayout){
+    private fun constrain(layout: ConstraintLayout){
 
         val constraint = ConstraintSet()
         constraint.clone(layout)
@@ -108,23 +105,24 @@ class GradeElement(id : Int, context: Context, grade: Grade) {
         constraint.applyTo(layout)
     }
 
-    fun makeDate(){
+    private fun makeDate(){
 
-        date.text = opinion.author
+        date.text = opinion.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm"))
         date.translationZ = 6f
 
         date.layoutParams = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        date.setTextColor(context.resources.getColor(R.color.dark))
+        date.setTextColor(context.resources.getColor(R.color.darkRed))
         date.textSize = 20f
     }
 
-    fun makeWho(){
+    private fun makeWho(){
 
         val padding = context.resources.getDimension(R.dimen.fab_margin).toInt()
-        who.text = opinion.opinion
+
+        who.text = Manager.getInstance().getExactProfessor(opinion).name
         who.translationZ = 5f
         who.background = context.resources.getDrawable(R.drawable.input, null)
         who.setPadding(padding/2, (padding * 1.5).toInt(), padding/2, padding/4)
@@ -133,61 +131,14 @@ class GradeElement(id : Int, context: Context, grade: Grade) {
             context.resources.getDimension(R.dimen.bg_width).toInt(),
             ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        who.setTextColor(context.resources.getColor(R.color.darkRed))
-        who.textSize = 24f//context.resources.getDimension(R.dimen.font14)
+        who.setTextColor(context.resources.getColor(R.color.buttonRed))
+        who.setTextAppearance(context, R.style.fontFamily)
+        who.textSize = 24f
         who.setOnClickListener{
             val intent = Intent(context, Edit::class.java)
             intent.putExtra("uuid", opinion.uid)
             context.startActivity(intent) }
-        //text.setTextAppearance(context, R.style.fontFamily)
     }
-
-//    fun makeLikes(){
-//
-//        likes.text = opinion.likes.toString()
-//        likes.translationZ = 6f
-//
-//        likes.layoutParams = ConstraintLayout.LayoutParams(
-//            (60*dpFactor).toInt(),
-//            ViewGroup.LayoutParams.WRAP_CONTENT)
-//
-//        likes.textAlignment = View.TEXT_ALIGNMENT_CENTER
-//
-//        //likes.setTextColor(context.resources.getColor(R.color.basicGrey)) -> in setLikesColors()
-//        likes.textSize = 16f//context.resources.getDimension(R.dimen.font14)
-//        likes.setTextAppearance(context, R.style.fontFamily)
-//    }
-//
-//    fun makeUpButton(){
-//
-//        upButton.setBackgroundColor(Color.argb(0,0,0,0))
-//        upButton.translationZ = 6f
-//
-//        setLikesColors(opinion.isLiked(user))
-//
-//        upButton.layoutParams = ConstraintLayout.LayoutParams(
-//            (25*dpFactor).toInt(),
-//            (21*dpFactor).toInt())
-//
-//        upButton.setOnClickListener{
-//
-//            setLikesColors(opinion.likeTap(user))
-//            likes.text = opinion.likes.toString()
-//        }
-//    }
-//
-//    fun setLikesColors(function: Boolean){
-//
-//        if(function){
-//
-//            upButton.setImageResource(R.drawable.ic_1up_red)
-//            likes.setTextColor(context.resources.getColor(R.color.buttonRed))
-//        }
-//        else{
-//            upButton.setImageResource(R.drawable.ic_1up_grey)
-//            likes.setTextColor(context.resources.getColor(R.color.redishGrey))
-//        }
-//    }
 
     fun create(layout: ConstraintLayout){
 

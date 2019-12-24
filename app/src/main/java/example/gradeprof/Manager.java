@@ -68,7 +68,7 @@ public class Manager {
                     for(DataSnapshot childProf : childProfList.getChildren()) {
 
                         String name = childProf.child("name").getValue().toString();
-                        String id = childProf.getKey().toString();
+                        String id = childProf.getKey();
                         String department = childProf.child("department").getValue().toString();
                         String info = childProf.child("info").getValue().toString();
                         Professor profTemp = new Professor(id, name, department, info);
@@ -91,7 +91,7 @@ public class Manager {
                                 List<String> likesTempList = new ArrayList<>();
                                 DataSnapshot childLikesList = childGrade.child("likes");
                                 for (DataSnapshot childLike : childLikesList.getChildren()) {
-                                    String likeTemp = childLike.getKey().toString();
+                                    String likeTemp = childLike.getKey();
                                     likesTempList.add(likeTemp);
                                 }
                                 tempGrade.setWhoLiked(likesTempList);
@@ -130,7 +130,7 @@ public class Manager {
             System.out.println(name + " list is empty!!!");
         }
     }
-    public String nullReplacer(Object toCheck){
+    private String nullReplacer(Object toCheck){
         if(toCheck != null){
             return toCheck.toString();
         } else return "";
@@ -170,7 +170,7 @@ public class Manager {
         List<Professor> list = new ArrayList<>();
         String regex = "(.*)" + toSearch + "(.*)";
         for(Professor temp: professorList){
-            if(temp.getName().matches(toSearch)){
+            if(temp.getName().contains(toSearch)){
                 list.add(temp);
             }
         }

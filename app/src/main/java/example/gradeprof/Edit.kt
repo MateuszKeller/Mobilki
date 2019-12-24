@@ -27,10 +27,6 @@ class Edit : AppCompatActivity() {
         grade =  m.getExactGrade(intent.getStringExtra("uuid"))
         setData()
 
-//        val prof = m.getExactProfessorName(grade)
-//        println("GRADE: " + grade.author + " " + grade.opinion)
-//        if(prof!=null) println("PROF: " + prof)
-
         closeButton.setOnClickListener{
             val intent = Intent(this, Opinions::class.java)
             startActivity(intent)
@@ -77,12 +73,12 @@ class Edit : AppCompatActivity() {
         findViewById<EditText>(R.id.opinionText).setText(grade.opinion)
     }
 
-    fun editOpinion(): Boolean {
+    private fun editOpinion(): Boolean {
 
-        var zGrade = findViewById<RatingBarSvg>(R.id.ratingZ).rating
-        var dGrade = findViewById<RatingBarSvg>(R.id.ratingD).rating
-        var mGrade = findViewById<RatingBarSvg>(R.id.ratingM).rating
-        var text = findViewById<EditText>(R.id.opinionText).text.toString()
+        val zGrade = findViewById<RatingBarSvg>(R.id.ratingZ).rating
+        val dGrade = findViewById<RatingBarSvg>(R.id.ratingD).rating
+        val mGrade = findViewById<RatingBarSvg>(R.id.ratingM).rating
+        val text = findViewById<EditText>(R.id.opinionText).text.toString()
 
         if(zGrade < 0.5 || dGrade < 0.5 || mGrade < 0.5){
 

@@ -15,9 +15,9 @@ import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
 
-    /// TODO usunać
+    /// TODO DEL - FOR TESTING
     val logOFF = true
-    val firebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseAuth = FirebaseAuth.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
             var login = email.text.toString().trim()
             var passw = password.text.toString().trim()
-            var regex = Regex ("([0-9]){6}")
+            val regex = Regex ("([0-9]){6}")
 
             if(logOFF){ login = "217107"; passw = "haslo1" }
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 println("onComplete function started")
                 if (it.isSuccessful) {
                     val intent = Intent(this, MainScreen::class.java)
-                    intent.putExtra("fromLogin", true) // TODO DEL - FOR TESTING
+                    intent.putExtra("startup", true)
                     startActivity(intent)
 
                 }

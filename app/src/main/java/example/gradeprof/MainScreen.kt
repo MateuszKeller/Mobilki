@@ -1,8 +1,11 @@
 package example.gradeprof
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.*
 import android.view.View.TEXT_ALIGNMENT_TEXT_END
@@ -18,15 +21,14 @@ import java.lang.StringBuilder
 
 class MainScreen : AppCompatActivity() {
 
-    var professorElements = ArrayList<ProfElement>()
-    var dim = false
-    val m = Manager.getInstance()
+    private var professorElements = ArrayList<ProfElement>()
+    private val m: Manager = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
-        if(intent.getBooleanExtra("fromLogin", false))
+        if(intent.getBooleanExtra("startup", false))
         Toast.makeText(applicationContext, "Witaj: " + m.user, Toast.LENGTH_LONG ).show()
 
         m.addDataStatusListener("MainScreenListener") { refreshElements(it)}
@@ -34,14 +36,27 @@ class MainScreen : AppCompatActivity() {
 
     private fun refreshElements(professorList : List<Professor>){
         print("Refresh buttons")
+
+        var list = professorList
+        searchBox.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                list = this@MainScreen.m.searchProfs(s.toString())
+            }
+        })
+
         professorElements.clear()
         var id = 0
-        for (p in professorList) {
+        for (p in list) {
             id += 10
             println("PROF: " + id + p.id)
             professorElements.add(ProfElement(id, this@MainScreen, p))
 
-            if(intent.getBooleanExtra("fromLogin", false))
+            if(intent.getBooleanExtra("startup", false))
             t(p)
         }
         for (b in professorElements) {
@@ -85,11 +100,7 @@ class MainScreen : AppCompatActivity() {
     }
 }
 
-class ProfElement(id : Int, context: Context, prof: Professor) {
-
-    val professor= prof
-    var id= id
-    var context= context
+class ProfElement(val id: Int, private val context: Context, private val professor: Professor) {
 
     var bg = Button(context)
     var photo = ImageView(context)
@@ -97,7 +108,7 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
     var department = TextView(context)
     var grades = TextView(context)
 
-    val dpFactor= context.resources.displayMetrics.density
+    private val dpFactor= context.resources.displayMetrics.density
 
     init {
         bg.id = id + 1
@@ -106,7 +117,7 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         department.id = id + 4
         grades.id = id + 5
 
-        System.out.println(toString())
+        println(toString())
     }
 
     override fun toString(): String{
@@ -123,7 +134,7 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         return ret.toString()
     }
 
-    fun setData(){
+    private fun setData(){
 
         makePhoto()
         makeName()
@@ -132,7 +143,7 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         makeBG()
     }
 
-    fun constrain(layout: ConstraintLayout){
+    private fun constrain(layout: ConstraintLayout){
 
         val constraint = ConstraintSet()
         constraint.clone(layout)
@@ -170,10 +181,10 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         constraint.applyTo(layout)
     }
 
-    fun makeBG(){
+    private fun makeBG(){
 
         bg.background = context.resources.getDrawable(R.drawable.input, null)
-        bg.translationZ = 0.1f
+        bg.translationZ = 5f
 
         bg.layoutParams = ConstraintLayout.LayoutParams(
             context.resources.getDimension(R.dimen.bg_width).toInt(),
@@ -185,7 +196,7 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
             context.startActivity(intent) }
     }
 
-    fun makePhoto(){
+    private fun makePhoto(){
 
         photo.setImageResource(R.drawable.temp_photo)
         photo.translationZ = 6f
@@ -195,7 +206,7 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
             context.resources.getDimension(R.dimen.photo).toInt())
     }
 
-    fun makeName(){
+    private fun makeName(){
 
         pname.text = professor.name
         pname.translationZ = 6f
@@ -209,9 +220,11 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         pname.setTextAppearance(context, R.style.fontFamily)
     }
 
-    fun makeDepartment(){
+    @SuppressLint("SetTextI18n")
+    private fun makeDepartment(){
 
-        department.text = "Wydział: " + professor.department
+        val dep = professor.department
+        department.text = "Wydział: $dep"
         department.translationZ = 6f
 
         department.layoutParams = ConstraintLayout.LayoutParams(
@@ -223,11 +236,12 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         department.setTextAppearance(context, R.style.fontFamily)
     }
 
-    fun makeGrades(){
+    @SuppressLint("SetTextI18n")
+    private fun makeGrades(){
 
         val g = professor.grades.size
         if(g != 1)
-            grades.text = g.toString() + " ocen(y)"
+            grades.text = "$g ocen(y)"
         else
             grades.text = "1 ocena"
 
@@ -243,7 +257,7 @@ class ProfElement(id : Int, context: Context, prof: Professor) {
         grades.setTextAppearance(context, R.style.fontFamily)
     }
 
-    fun calcHeight(): Int{
+    private fun calcHeight(): Int{
 
         pname.measure(0,0)
         department.measure(0,0)

@@ -11,7 +11,7 @@ import java.util.*
 class UserName : AppCompatActivity() {
 
     lateinit var professor: Professor
-    val m = Manager.getInstance()
+    private val m: Manager = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +31,7 @@ class UserName : AppCompatActivity() {
             val intent = Intent( this, Profile::class.java)
             intent.putExtra("professor", professor.id)
 
-            var user = findViewById<EditText>(R.id.userName).text.toString()
-            println("|" + user + "|")
+            val user = findViewById<EditText>(R.id.userName).text.toString()
             if(user != "")
                 grade.userName = user
 

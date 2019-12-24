@@ -112,7 +112,4 @@
         app:srcCompat="@drawable/visibility"
         android:visibility="gone"/>
 
-
-
-    <!--TODO widoczność hasła on/off -->
 </androidx.constraintlayout.widget.ConstraintLayout>

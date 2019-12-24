@@ -13,13 +13,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.lang.StringBuilder
+import example.gradeprof.Opinions
 
 class Profile : AppCompatActivity() {
 
     lateinit var professor: Professor
     lateinit var gradesList: List<Grade>
     var opinionElements = ArrayList<OpinionElement>()
-    val m = Manager.getInstance()
+    private val m: Manager = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,7 @@ class Profile : AppCompatActivity() {
         }
     }
 
-    fun setData() {
+    private fun setData() {
 
         findViewById<TextView>(R.id.profName).text = professor.name
         findViewById<TextView>(R.id.informationText).text = professor.info
@@ -68,18 +69,15 @@ class Profile : AppCompatActivity() {
 }
 
 ///-------------------------------------------------------------------------------------------------
-class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
+class OpinionElement(var id: Int, var context: Context, grade: Grade, val user: String) {
 
     var opinion= grade
-    var id= id
-    var context= context
-    val user = user
     var author = TextView(context)
     var text = TextView(context)
     var likes = TextView(context)
     var upButton = ImageButton(context)
 
-    val dpFactor= context.resources.displayMetrics.density
+    private val dpFactor= context.resources.displayMetrics.density
     init {
         text.id = id + 1
         author.id = id + 2
@@ -102,7 +100,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         return ret.toString()
     }
 
-    fun setData(){
+    private fun setData(){
 
         makeAuthor()
         makeText()
@@ -110,7 +108,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         makeUpButton()
     }
 
-    fun constrain(layout: ConstraintLayout){
+    private fun constrain(layout: ConstraintLayout){
 
         val constraint = ConstraintSet()
         constraint.clone(layout)
@@ -141,7 +139,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         constraint.applyTo(layout)
     }
 
-    fun makeAuthor(){
+    private fun makeAuthor(){
 
         author.text = opinion.userName
         author.translationZ = 6f
@@ -154,7 +152,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         author.textSize = 16f
     }
 
-    fun makeText(){
+    private fun makeText(){
 
         val margin = context.resources.getDimension(R.dimen.fab_margin).toInt()
         text.text = opinion.opinion
@@ -171,7 +169,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         //text.setTextAppearance(context, R.style.fontFamily)
     }
 
-    fun makeLikes(){
+    private fun makeLikes(){
 
         likes.text = opinion.likes.toString()
         likes.translationZ = 6f
@@ -187,7 +185,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         likes.setTextAppearance(context, R.style.fontFamily)
     }
 
-    fun makeUpButton(){
+    private fun makeUpButton(){
 
         upButton.setBackgroundColor(Color.argb(0,0,0,0))
         upButton.translationZ = 6f
@@ -205,7 +203,7 @@ class OpinionElement(id : Int, context: Context, grade: Grade, user: String) {
         }
     }
 
-    fun setLikesColors(function: Boolean){
+    private fun setLikesColors(function: Boolean){
 
         if(function){
 
