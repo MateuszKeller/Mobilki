@@ -28,7 +28,7 @@ class GradeForm : AppCompatActivity(){
             val intent = Intent( this, UserName::class.java)
             intent.putExtra("professor", professor.id)
 
-            val grade = addOpinion()
+            val grade = readOpinionFromFields()
             if(grade != null){
                 intent.putExtra("grade", grade)
                 startActivity(intent)
@@ -36,7 +36,7 @@ class GradeForm : AppCompatActivity(){
         }// setOnClickListener
     }
 
-    fun addOpinion(): Grade? {
+    private fun readOpinionFromFields(): Grade? {
 
         val zGrade = findViewById<RatingBarSvg>(R.id.ratingZ).rating
         val dGrade = findViewById<RatingBarSvg>(R.id.ratingD).rating

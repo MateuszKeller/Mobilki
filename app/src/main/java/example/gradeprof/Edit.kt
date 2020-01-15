@@ -33,8 +33,14 @@ class Edit : AppCompatActivity() {
         }
 
         editButton.setOnClickListener{
-            if(editOpinion())
-                startActivity(Intent( this, Opinions::class.java))
+            if(editOpinion()) {
+                val newGrade = Grade(grade.uid, grade.passRate, grade.availability, grade.merits, grade.opinion, grade.author)
+                val profId  = m.getProfForGrade(grade.uid)
+
+                m.removeGrade(grade.uid)
+                m.sendGrade(profId, newGrade)
+                startActivity(Intent(this, Opinions::class.java))
+            }
         }
 
         deleteButton.setOnClickListener{
@@ -50,7 +56,8 @@ class Edit : AppCompatActivity() {
 
         view.yesButton.setOnClickListener{
             dialog.dismiss()
-            m.deleteGrade(grade, m.getExactProfessor(grade))
+            m.removeGrade(grade.uid)
+//            m.deleteGrade(grade, m.getExactProfessor(grade))
             val intent = Intent(this, Opinions::class.java)
             startActivity(intent)
         }
@@ -85,6 +92,7 @@ class Edit : AppCompatActivity() {
             Toast.makeText(applicationContext, "Ocena nie może być mniejsza niż 0.5!", Toast.LENGTH_SHORT ).show()
             return false
         }
+
 
         grade.opinion = text
         grade.passRate = zGrade

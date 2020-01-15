@@ -25,9 +25,11 @@ class Opinions : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opinions)
-
         gradesList = m.myGrades
-        generatingGrades()
+        Manager.getInstance().addDataStatusListener("MyOpinionsListener", {professorList -> generatingGrades(professorList) })
+
+
+//        generatingGrades()
 
         closeButton.setOnClickListener {
             val intent = Intent(this, MainScreen::class.java)
@@ -35,10 +37,20 @@ class Opinions : AppCompatActivity(){
         }
     }
 
-    private fun generatingGrades() {
+    private fun generatingGrades(professorList : List<Professor>) {
 
+
+        val myGrades : MutableList<Grade> = ArrayList<Grade>()
+        for(prof in professorList){
+            for(grade in prof.grades){
+                if(grade.author.equals(m.user))
+                    myGrades.add(grade);
+            }
+        }
+
+        gList.clear()
         var id = 0
-        for (g in gradesList) {
+        for (g in myGrades) {
             id += 10
             gList.add(GradeElement(id, this@Opinions, g))
         }

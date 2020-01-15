@@ -255,7 +255,7 @@
         app:srcCompat="@drawable/input" />
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/displayName"
         android:layout_width="@dimen/author_width"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -277,7 +277,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/opinionBG"
         app:layout_constraintStart_toStartOf="@+id/opinionBG"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintTop_toBottomOf="@+id/displayName" />
 
     <TextView
         android:id="@+id/likes"

@@ -6,36 +6,35 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_grade_form.*
 import kotlinx.android.synthetic.main.activity_profile.closeButton
-import java.util.*
 
 class UserName : AppCompatActivity() {
 
-    lateinit var professor: Professor
     private val m: Manager = Manager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_name)
 
-        professor =  m.getExactProfessor(intent.getStringExtra("professor"))
+        var professorId =  intent.getStringExtra("professor")
         var grade = intent.getSerializableExtra("grade") as Grade
         println(grade.toString())
 
 
         closeButton.setOnClickListener{
             val intent = Intent( this, GradeForm::class.java)
-            intent.putExtra("professor", professor.id)
+            intent.putExtra("professor", professorId)
             startActivity(intent)}
 
         acceptButton.setOnClickListener{
             val intent = Intent( this, Profile::class.java)
-            intent.putExtra("professor", professor.id)
+            intent.putExtra("professor", professorId)
 
-            val user = findViewById<EditText>(R.id.userName).text.toString()
+            val user = findViewById<EditText>(R.id.displayName).text.toString()
             if(user != "")
-                grade.userName = user
+                grade.displayName = user
 
-            professor.addGrade(grade)
+//            professor.addGrade(grade)
+            m.sendGrade(professorId, grade)
             startActivity(intent)}
     }
 }

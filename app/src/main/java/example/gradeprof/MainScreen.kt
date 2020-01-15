@@ -31,7 +31,19 @@ class MainScreen : AppCompatActivity() {
         if(intent.getBooleanExtra("startup", false))
         Toast.makeText(applicationContext, "Witaj: " + m.user, Toast.LENGTH_LONG ).show()
 
+
+
         m.addDataStatusListener("MainScreenListener") { refreshElements(it)}
+
+//        ///////// DB TEST
+////        val prof : Professor = Professor("Krystian Wąż", "FTIMS", "cokolwiek4", ArrayList<Grade>(), "777777")
+////        m.sendProfToDatabase(prof)
+//        val grade = Grade(1.2.toFloat(), 3.4.toFloat(), 4.5.toFloat(),"do kitu", m.user)
+//        m.sendGrade("555555", grade)
+//        m.addLike("555555", grade.uid)
+//        m.removeGrade("gradeId1");
+////////////////
+
     }
 
     private fun refreshElements(professorList : List<Professor>){
@@ -56,8 +68,8 @@ class MainScreen : AppCompatActivity() {
             println("PROF: " + id + p.id)
             professorElements.add(ProfElement(id, this@MainScreen, p))
 
-            if(intent.getBooleanExtra("startup", false))
-            t(p)
+//            if(intent.getBooleanExtra("startup", false))
+//            t(p)
         }
         for (b in professorElements) {
             b.create(findViewById(R.id.innerScrollLayout))
@@ -65,21 +77,21 @@ class MainScreen : AppCompatActivity() {
     }
 
     ///TODO DEL - FOR TESTING
-    fun t(p: Professor){
-
-        p.addGrade(Grade(
-            4.5f,
-            3.1f,
-            2.2f,
-            resources.getString(R.string.OT1),
-            "216724"))
-        p.addGrade(Grade(
-            4.5f,
-            3.1f,
-            2.2f,
-            resources.getString(R.string.OT2),
-            m.indexNumber))
-    }
+//    fun t(p: Professor){
+//
+//        p.addGrade(Grade(
+//            4.5f,
+//            3.1f,
+//            2.2f,
+//            resources.getString(R.string.OT1),
+//            "216724"))
+//        p.addGrade(Grade(
+//            4.5f,
+//            3.1f,
+//            2.2f,
+//            resources.getString(R.string.OT2),
+//            m.indexNumber))
+//    }
 
     fun showPopupMenu(view: View) {
         dimming.visibility = VISIBLE

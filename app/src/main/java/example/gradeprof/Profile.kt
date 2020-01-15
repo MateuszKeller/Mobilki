@@ -13,11 +13,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.lang.StringBuilder
-import example.gradeprof.Opinions
 
 class Profile : AppCompatActivity() {
 
-    lateinit var professor: Professor
+//    lateinit var professor: Professor
     lateinit var gradesList: List<Grade>
     var opinionElements = ArrayList<OpinionElement>()
     private val m: Manager = Manager.getInstance()
@@ -26,11 +25,14 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        professor =  m.getExactProfessor(intent.getStringExtra("professor"))
-        gradesList = professor.grades
+        val professorId =  intent.getStringExtra("professor")
 
-        setData()
-        generatingOpinions()
+        Manager.getInstance().addDataStatusListener("ProfileListener", {professorList -> refreshElements(professorList, professorId) })
+
+
+//        gradesList = professor.grades
+
+
 
         closeButton.setOnClickListener {
             val intent = Intent(this, MainScreen::class.java)
@@ -39,12 +41,23 @@ class Profile : AppCompatActivity() {
 
         gradeButton.setOnClickListener {
             val intent = Intent(this, GradeForm::class.java)
-            intent.putExtra("professor", professor.id)
+            intent.putExtra("professor", professorId)
             startActivity(intent)
         }
     }
 
-    private fun setData() {
+    private fun refreshElements(professorList: List<Professor>, professorId : String){
+        lateinit var professor : Professor
+        for(prof in professorList){
+            if(prof.id.equals(professorId)){
+                professor = prof
+            }
+        }
+        setData(professor)
+        generatingOpinions(professor.grades)
+    }
+
+    private fun setData(professor : Professor) {
 
         findViewById<TextView>(R.id.profName).text = professor.name
         findViewById<TextView>(R.id.informationText).text = professor.info
@@ -54,10 +67,10 @@ class Profile : AppCompatActivity() {
         findViewById<RatingBarSvg>(R.id.ratingM).rating = professor.averageMerits()
     }
 
-    private fun generatingOpinions() {
-
+    private fun generatingOpinions(grades : List<Grade>) {
+        opinionElements.clear()
         var id = 0
-        for (g in gradesList) {
+        for (g in grades) {
             if(g.opinion == "" || g.opinion == null) continue
 
             id += 10
@@ -141,7 +154,7 @@ class OpinionElement(var id: Int, var context: Context, grade: Grade, val user: 
 
     private fun makeAuthor(){
 
-        author.text = opinion.userName
+        author.text = opinion.displayName
         author.translationZ = 6f
 
         author.layoutParams = ConstraintLayout.LayoutParams(

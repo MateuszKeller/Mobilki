@@ -1,7 +1,5 @@
 package example.gradeprof;
 
-import android.icu.util.LocaleData;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,20 +14,32 @@ public class Grade implements Comparable <Grade>, Serializable {
     private String opinion;
     private List<String> whoLiked;
     private String author;
-    private String userName;
-    private final String uid = UUID.randomUUID().toString();
+    private String displayName;
+    private String uid = UUID.randomUUID().toString();
     private int tempLikes = 0;
     private LocalDateTime date;
+//    private String nick;
 
     public Grade(float passRate, float availability, float merits, String author) {
         this.passRate = passRate;
         this.availability = availability;
         this.merits = merits;
         this.author = author;
-        this.userName = author;
+        this.displayName = author;
         this.date = LocalDateTime.now();
     }
 
+    public Grade(String gradeId, float passRate, float availability, float merits, String opinion, String author) {
+        this.uid = gradeId;
+        this.passRate = passRate;
+        this.availability = availability;
+        this.merits = merits;
+        this.opinion = opinion;
+        this.whoLiked = new ArrayList<>();
+        this.author = author;
+        this.displayName = author;
+        this.date = LocalDateTime.now();
+    }
     public Grade(float passRate, float availability, float merits, String opinion, String author) {
         this.passRate = passRate;
         this.availability = availability;
@@ -37,7 +47,7 @@ public class Grade implements Comparable <Grade>, Serializable {
         this.opinion = opinion;
         this.whoLiked = new ArrayList<>();
         this.author = author;
-        this.userName = author;
+        this.displayName = author;
         this.date = LocalDateTime.now();
     }
 
@@ -47,13 +57,14 @@ public class Grade implements Comparable <Grade>, Serializable {
     public void setAuthor(String author) {
         this.author = author;
     }
-    public String getUserName(){
-        return userName;
+    public String getDisplayName(){
+        return displayName;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
+//    public void setNick(String nick) { this.nick = nick; }
     public String getUID(){
         return uid;
     }
@@ -101,7 +112,8 @@ public class Grade implements Comparable <Grade>, Serializable {
                 "; Meryt: " + merits +
                 "; Opinia: " + opinion +
                 "; Autor: " + author +
-                "; User: " + userName;
+                "; User: " + displayName;
         return ret;
     }
+
 }

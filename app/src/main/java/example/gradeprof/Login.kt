@@ -16,7 +16,8 @@ import java.util.regex.Pattern
 class MainActivity : AppCompatActivity() {
 
     /// TODO DEL - FOR TESTING
-    val logOFF = true
+    val logOFF = false
+
     private val firebaseAuth = FirebaseAuth.getInstance()
 
 

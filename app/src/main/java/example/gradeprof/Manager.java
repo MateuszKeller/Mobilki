@@ -32,6 +32,10 @@ public class Manager {
 
     public void registerUser(String login){
         this.user = login;
+        int index = login.indexOf('@');
+        String number = login.substring(0,index);
+        this.indexNumber = number;
+
     }
     public String getUser(){
         return user;
@@ -58,6 +62,9 @@ public class Manager {
         return professorList;
     }
 
+
+    //TODO dodać obsługę wyjątków, żeby nie przewracało apki jak jest błąd w bazie
+
     private void addListener(){
         DatabaseReference ref = base.getReference();
         ValueEventListener listener = new ValueEventListener() {
@@ -83,11 +90,13 @@ public class Manager {
                                 String merits = nullReplacer(childGrade.child("merits").getValue());
                                 String opinion = nullReplacer(childGrade.child("opinion").getValue());
                                 String author = nullReplacer(childGrade.child("author").getValue());
+                                String displayName = nullReplacer(childGrade.child("displayName").getValue());
                                 System.out.println("gradeId: " + gradeId +
                                         " passRate: " + passRate + " availability: " + availability +
                                         " merits: " + merits +
                                         " opinion: " + opinion);
-                                tempGrade = new Grade(Float.valueOf(passRate), Float.valueOf(availability), Float.valueOf(merits), author);
+                                tempGrade = new Grade(gradeId, Float.valueOf(passRate), Float.valueOf(availability), Float.valueOf(merits), opinion, author);
+                                tempGrade.setDisplayName(displayName);
                                 List<String> likesTempList = new ArrayList<>();
                                 DataSnapshot childLikesList = childGrade.child("likes");
                                 for (DataSnapshot childLike : childLikesList.getChildren()) {
@@ -117,6 +126,78 @@ public class Manager {
             }
         };
         ref.addValueEventListener(listener);
+    }
+
+    public Map<String, Object> gradeToMap(Grade grade){
+        HashMap <String, Object> result = new HashMap<>();
+        result.put("author", user);
+        result.put("availability", grade.getAvailability());
+        result.put("merits", grade.getMerits());
+        result.put("passRate", grade.getPassRate());
+        result.put("opinion", grade.getOpinion());
+        result.put("displayName", grade.getDisplayName());
+        return  result;
+    }
+
+    public Map<String, Object> profToMap(Professor prof){
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("name", prof.getName());
+        result.put("info", prof.getInfo());
+        result.put("department", prof.getDepartment());
+        return result;
+    }
+
+    public void sendProfToDatabase(Professor prof){
+        DatabaseReference ref = base.getReference();
+        String key = prof.getID();
+
+        Map<String, Object> profValues = profToMap(prof);
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/profList/" + key, profValues);
+
+        ref.updateChildren(childUpdates);
+    }
+
+    public void removeGrade(String gradeId){
+        String profId = getProfForGrade(gradeId);
+        System.out.println("Prof to remove: " + profId);
+        System.out.println("grade to remove: " + gradeId);
+        DatabaseReference ref = base.getReference();
+        ref.child("profList").child(profId).child("grades").child(gradeId).removeValue();
+
+    }
+
+    public String getProfForGrade(String gradeId){
+        for (Professor prof : professorList){
+            for (Grade grade : prof.getGrades()){
+                if(grade.getUID().equals(gradeId)){
+                    return prof.getID();
+                }
+            }
+        }
+        return null;
+    }
+
+    public void sendGrade(String profID, Grade grade){
+        DatabaseReference ref = base.getReference();
+        String key = grade.getUID();
+
+        Map<String, Object> gradeValues = gradeToMap(grade);
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/profList/" + profID + "/grades/" + key, gradeValues);
+        ref.updateChildren(childUpdates);
+    }
+
+    public void addLike(String profID, String gradeID){
+        DatabaseReference ref = base.getReference();
+        Map<String, Object> like = new HashMap<>();
+        like.put(indexNumber, "1");
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/profList/" + profID + "/grades/" + gradeID + "/likes/", like);
+        ref.updateChildren(childUpdates);
     }
 
     public void isNull(Object o, String name){
@@ -202,7 +283,7 @@ public class Manager {
         for(Professor prof: professorList){
             List<Grade> tempList = prof.getGrades();
             for(Grade temp: tempList){
-                if(temp.getAuthor().equals(indexNumber)){
+                if(temp.getAuthor().equals(user)){
                     myGrades.add(temp);
                 }
             }

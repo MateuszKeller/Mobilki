@@ -33,13 +33,13 @@
         android:text="Nazwa użytkowanika:"
         android:textColor="@color/basicGrey"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/userName"
+        app:layout_constraintBottom_toTopOf="@+id/displayName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/displayName"
         android:layout_width="328dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
