@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -40,9 +41,14 @@ class Profile : AppCompatActivity() {
         }
 
         gradeButton.setOnClickListener {
-            val intent = Intent(this, GradeForm::class.java)
-            intent.putExtra("professor", professorId)
-            startActivity(intent)
+            if(m.getExactProfessor(professorId).didUserGrade(m.user)){
+                Toast.makeText(applicationContext, "Już oceniłeś tego wykładowcę", Toast.LENGTH_LONG ).show()
+
+            } else {
+                val intent = Intent(this, GradeForm::class.java)
+                intent.putExtra("professor", professorId)
+                startActivity(intent)
+            }
         }
     }
 

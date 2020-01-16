@@ -59,6 +59,14 @@ public class Professor implements Comparable<Professor>, Serializable {
         this.info = info;
     }
 
+    public boolean didUserGrade(String user){
+        for(Grade grade : grades){
+            if(grade.getAuthor().equals(user))
+                return true;
+        }
+        return false;
+    }
+
     public String getID(){
         return ID;
     }
