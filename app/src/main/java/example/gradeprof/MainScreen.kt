@@ -17,8 +17,6 @@ import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_main_screen.*
 import java.lang.StringBuilder
 
-//TODO linesCount()
-
 class MainScreen : AppCompatActivity() {
 
     private var professorElements = ArrayList<ProfElement>()
@@ -49,7 +47,7 @@ class MainScreen : AppCompatActivity() {
     }
 
     private fun refreshElements(professorList : List<Professor>){
-        print("Refresh buttons")
+        println("Refresh buttons")
 
         var list = professorList
         searchBox.addTextChangedListener(object : TextWatcher {
@@ -77,23 +75,6 @@ class MainScreen : AppCompatActivity() {
             b.create(findViewById(R.id.innerScrollLayout))
         }
     }
-
-    ///TODO DEL - FOR TESTING
-//    fun t(p: Professor){
-//
-//        p.addGrade(Grade(
-//            4.5f,
-//            3.1f,
-//            2.2f,
-//            resources.getString(R.string.OT1),
-//            "216724"))
-//        p.addGrade(Grade(
-//            4.5f,
-//            3.1f,
-//            2.2f,
-//            resources.getString(R.string.OT2),
-//            m.indexNumber))
-//    }
 
     fun showPopupMenu(view: View) {
         dimming.visibility = VISIBLE

@@ -71,7 +71,7 @@ class Edit : AppCompatActivity() {
 
         findViewById<TextView>(R.id.profName).text = m.getExactProfessor(grade).name
 
-        findViewById<TextView>(R.id.information).text = "Ocena dodana: " + grade.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm"))
+//        findViewById<TextView>(R.id.information).text = "Ocena dodana: " + grade.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm"))
 
         findViewById<RatingBarSvg>(R.id.ratingZ).rating = grade.passRate
         findViewById<RatingBarSvg>(R.id.ratingD).rating = grade.availability
@@ -98,7 +98,7 @@ class Edit : AppCompatActivity() {
         grade.passRate = zGrade
         grade.availability = dGrade
         grade.merits = mGrade
-        grade.date = LocalDateTime.now()
+        grade.date = grade.date
 
         return true
     }

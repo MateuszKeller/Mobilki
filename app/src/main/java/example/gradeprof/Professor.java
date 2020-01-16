@@ -3,6 +3,7 @@ package example.gradeprof;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -88,12 +89,21 @@ public class Professor implements Comparable<Professor>, Serializable {
         Collections.sort(grades, Collections.<Grade>reverseOrder());
     }
 
+    public String toString(){
+
+        String ret = "";
+        ret+= this.ID + "/ "
+            + this.name + "/ "
+            + this.department + "/ "
+            + this.info + "/ "
+            + this.grades.size();
+        return ret;
+    }
+
     @Override
     public int compareTo(Professor other) {
         String thisProf = this.ID;
         String otherProf = other.getID();
         return thisProf.compareTo(otherProf);
     }
-
-
 }

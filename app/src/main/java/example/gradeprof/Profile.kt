@@ -28,12 +28,9 @@ class Profile : AppCompatActivity() {
 
         val professorId =  intent.getStringExtra("professor")
 
-        Manager.getInstance().addDataStatusListener("ProfileListener", {professorList -> refreshElements(professorList, professorId) })
-
+        Manager.getInstance().addDataStatusListener("ProfileListener") { professorList -> refreshElements(professorList, professorId) }
 
 //        gradesList = professor.grades
-
-
 
         closeButton.setOnClickListener {
             val intent = Intent(this, MainScreen::class.java)
@@ -55,7 +52,7 @@ class Profile : AppCompatActivity() {
     private fun refreshElements(professorList: List<Professor>, professorId : String){
         lateinit var professor : Professor
         for(prof in professorList){
-            if(prof.id.equals(professorId)){
+            if(prof.id == professorId){
                 professor = prof
             }
         }
@@ -90,7 +87,7 @@ class Profile : AppCompatActivity() {
 ///-------------------------------------------------------------------------------------------------
 class OpinionElement(var id: Int, var context: Context, grade: Grade, val user: String, var profId: String) {
 
-    var gradeId = grade.uid
+    var gradeId: String = grade.uid
     var professorId = profId
     var opinion= grade
     var author = TextView(context)

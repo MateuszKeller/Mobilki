@@ -15,6 +15,9 @@ import kotlinx.android.synthetic.main.activity_opinions.*
 import kotlinx.android.synthetic.main.activity_opinions.closeButton
 import java.lang.StringBuilder
 import java.time.format.DateTimeFormatter
+import android.view.Gravity
+
+
 
 class Opinions : AppCompatActivity(){
 
@@ -89,7 +92,7 @@ class GradeElement(val id: Int, val context: Context, grade: Grade) {
     private fun setData(){
 
         makeWho()
-        makeDate()
+//        makeDate()
     }
 
     private fun constrain(layout: ConstraintLayout){
@@ -110,9 +113,9 @@ class GradeElement(val id: Int, val context: Context, grade: Grade) {
         constraint.connect(who.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0)
         constraint.connect(who.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0)
 
-        margin = context.resources.getDimension(R.dimen.fab_margin).toInt()
-        constraint.connect(date.id, ConstraintSet.TOP, who.id, ConstraintSet.TOP, margin/4)
-        constraint.connect(date.id, ConstraintSet.LEFT, who.id, ConstraintSet.LEFT, margin/4)
+//        margin = context.resources.getDimension(R.dimen.fab_margin).toInt()
+//        constraint.connect(date.id, ConstraintSet.TOP, who.id, ConstraintSet.TOP, margin/4)
+//        constraint.connect(date.id, ConstraintSet.LEFT, who.id, ConstraintSet.LEFT, margin/4)
 
         constraint.applyTo(layout)
     }
@@ -137,7 +140,7 @@ class GradeElement(val id: Int, val context: Context, grade: Grade) {
         who.text = Manager.getInstance().getExactProfessor(opinion).name
         who.translationZ = 5f
         who.background = context.resources.getDrawable(R.drawable.input, null)
-        who.setPadding(padding/2, (padding * 1.5).toInt(), padding/2, padding/4)
+        who.setPadding(padding/2, padding, padding/2, padding)
 
         who.layoutParams = ConstraintLayout.LayoutParams(
             context.resources.getDimension(R.dimen.bg_width).toInt(),
@@ -145,7 +148,8 @@ class GradeElement(val id: Int, val context: Context, grade: Grade) {
 
         who.setTextColor(context.resources.getColor(R.color.buttonRed))
         who.setTextAppearance(context, R.style.fontFamily)
-        who.textSize = 24f
+        who.textSize = 30f
+        who.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL;
         who.setOnClickListener{
             val intent = Intent(context, Edit::class.java)
             intent.putExtra("uuid", opinion.uid)

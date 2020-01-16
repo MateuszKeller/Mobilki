@@ -15,9 +15,6 @@ import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
 
-    /// TODO DEL - FOR TESTING
-    val logOFF = false
-
     private val firebaseAuth = FirebaseAuth.getInstance()
 
 
@@ -32,15 +29,18 @@ class MainActivity : AppCompatActivity() {
             var passw = password.text.toString().trim()
             val regex = Regex ("([0-9]){6}")
 
-            if(logOFF){ login = "217107"; passw = "haslo1" }
-
-            if(regex.matches(login)){
+            if(regex.matches(login) && login.isNotEmpty() && passw.isNotEmpty()){
 
                 m.indexNumber = login
-                login  = login + "@edu.p.lodz.pl"
-            }
+                login  = "$login@edu.p.lodz.pl"
 
-            m.registerUser(login)
+                m.registerUser(login)
+            }
+            else
+                return@setOnClickListener
+
+
+
 
             firebaseAuth.signInWithEmailAndPassword(login, passw).addOnCompleteListener {
                 println("onComplete function started")

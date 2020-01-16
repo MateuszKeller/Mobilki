@@ -88,11 +88,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
-        android:text="Ocena dodana: 24.10.2019 r."
+        android:text=" "
         android:textColor="@color/basicGrey"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+    <!-- Ocena dodana: 24.10.2019 r. -->
 
     <ImageView
         android:id="@+id/infoZ"
