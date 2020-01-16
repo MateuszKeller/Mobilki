@@ -42,6 +42,8 @@ class MainScreen : AppCompatActivity() {
 //        m.sendGrade("555555", grade)
 //        m.addLike("555555", grade.uid)
 //        m.removeGrade("gradeId1");
+
+        m.removeLike("111111", "c4fadc30-adec-47fb-9952-4157af1fea04", "216724")
 ////////////////
 
     }

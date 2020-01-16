@@ -196,8 +196,14 @@ public class Manager {
         like.put(indexNumber, "1");
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/profList/" + profID + "/grades/" + gradeID + "/likes/", like);
+        childUpdates.put("/profList/" + profID + "/grades/" + gradeID + "/likes/" , like);
         ref.updateChildren(childUpdates);
+    }
+
+    public void removeLike(String profID, String gradeID, String indexNumber){
+        DatabaseReference ref = base.getReference();
+        ref.child("profList").child(profID).child("grades").child(gradeID).child("likes").child(indexNumber).removeValue();
+
     }
 
     public void isNull(Object o, String name){
@@ -251,7 +257,7 @@ public class Manager {
         List<Professor> list = new ArrayList<>();
         String regex = "(.*)" + toSearch + "(.*)";
         for(Professor temp: professorList){
-            if(temp.getName().contains(toSearch)){
+            if(temp.getName().toLowerCase().matches(regex.toLowerCase())){
                 list.add(temp);
             }
         }

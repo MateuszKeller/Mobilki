@@ -84,12 +84,14 @@ public class Grade implements Comparable <Grade>, Serializable {
     public void setDate(LocalDateTime date) { this.date = date;}
 
 
-    public boolean likeTap(String indexNumber){
+    public boolean likeTap(String indexNumber, String profId, String gradeId){
         if (isLiked(indexNumber)) {
             whoLiked.remove(indexNumber);
+            Manager.getInstance().removeLike(profId, gradeId, indexNumber);
             return false;
         } else {
             whoLiked.add(indexNumber);
+            Manager.getInstance().addLike(profId, gradeId);
             return true;
         }
     }

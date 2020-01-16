@@ -16,7 +16,7 @@ import java.lang.StringBuilder
 
 class Profile : AppCompatActivity() {
 
-//    lateinit var professor: Professor
+    lateinit var professor: Professor
     lateinit var gradesList: List<Grade>
     var opinionElements = ArrayList<OpinionElement>()
     private val m: Manager = Manager.getInstance()
@@ -74,7 +74,7 @@ class Profile : AppCompatActivity() {
             if(g.opinion == "" || g.opinion == null) continue
 
             id += 10
-            opinionElements.add(OpinionElement(id, this@Profile, g, m.indexNumber))
+            opinionElements.add(OpinionElement(id, this@Profile, g, m.indexNumber, intent.getStringExtra("professor")))
         }
         for (o in opinionElements)
             o.create(findViewById(R.id.innerScrollLayout))
@@ -82,8 +82,10 @@ class Profile : AppCompatActivity() {
 }
 
 ///-------------------------------------------------------------------------------------------------
-class OpinionElement(var id: Int, var context: Context, grade: Grade, val user: String) {
+class OpinionElement(var id: Int, var context: Context, grade: Grade, val user: String, var profId: String) {
 
+    var gradeId = grade.uid
+    var professorId = profId
     var opinion= grade
     var author = TextView(context)
     var text = TextView(context)
@@ -203,7 +205,7 @@ class OpinionElement(var id: Int, var context: Context, grade: Grade, val user: 
         upButton.setBackgroundColor(Color.argb(0,0,0,0))
         upButton.translationZ = 6f
 
-        setLikesColors(opinion.isLiked(user))
+        setLikesColors(opinion.isLiked(Manager.getInstance().indexNumber))
 
         upButton.layoutParams = ConstraintLayout.LayoutParams(
             (25*dpFactor).toInt(),
@@ -211,7 +213,7 @@ class OpinionElement(var id: Int, var context: Context, grade: Grade, val user: 
 
         upButton.setOnClickListener{
 
-            setLikesColors(opinion.likeTap(user))
+            setLikesColors(opinion.likeTap(Manager.getInstance().indexNumber, professorId, gradeId))
             likes.text = opinion.likes.toString()
         }
     }
